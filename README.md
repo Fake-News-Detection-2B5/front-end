@@ -10,15 +10,15 @@ This is the repository for the front-end.
 
 1. Install `create-react-app` (globally)
 
-```shell
-npm i -g create-react-app
-```
+    ```shell
+    npm i -g create-react-app
+    ```
 
 1. Run `create-react-app` (it may take a while). You won't need the new app, but this makes sure that you can work with React.
 
-```shell
-npx create-react-app test-app
-```
+    ```shell
+    npx create-react-app test-app
+    ```
 
 1. Remove the newly-created `test-app` directory.
 
@@ -26,29 +26,29 @@ npx create-react-app test-app
 
 1. Clone this repository anywhere.
 
-```shell
-git clone https://github.com/Fake-News-Detection-2B5/front-end
+    ```shell
+    git clone https://github.com/Fake-News-Detection-2B5/front-end
 
-cd front-end
-```
+    cd front-end
+    ```
 
 1. Install the  project Node dependencies
 
-```shell
-npm i
-```
+    ```shell
+    npm i
+    ```
 
 1. Test if the project works
 
-```shell
-yarn start
-```
+    ```shell
+    yarn start
+    ```
 
 1. If `yarn` wasn't found, manually install it (globally)
 
-```shell
-npm i -g yarn
-```
+   ```shell
+    npm i -g yarn
+   ```
 
 # Scripts
 
