@@ -2,7 +2,55 @@
 
 This is the repository for the front-end.
 
-# Yarn Scripts
+# First time setup
+
+## React setup
+
+1. Install [Node.js](https://nodejs.org/en/) ([>=15](https://nodejs.org/dist/v15.12.0/node-v15.12.0-x64.msi))
+
+1. Install `create-react-app` (globally)
+
+```shell
+npm i -g create-react-app
+```
+
+1. Run `create-react-app` (it may take a while). You won't need the new app, but this makes sure that you can work with React.
+
+```shell
+npx create-react-app test-app
+```
+
+1. Remove the newly-created `test-app` directory.
+
+## Project setup
+
+1. Clone this repository anywhere.
+
+```shell
+git clone https://github.com/Fake-News-Detection-2B5/front-end
+
+cd front-end
+```
+
+1. Install the  project Node dependencies
+
+```shell
+npm i
+```
+
+1. Test if the project works
+
+```shell
+yarn start
+```
+
+1. If `yarn` wasn't found, manually install it (globally)
+
+```shell
+npm i -g yarn
+```
+
+# Scripts
 
 ## `yarn start`
 
