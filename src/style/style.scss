@@ -1,1 +1,18 @@
+$white-dark: #F2F2F2;
+$white: #FFF;
+$theme-colors: (
+  "primary": hsl(145, 100%, 33%),
+  "danger": #ff4136
+);
+
 @import "~bootstrap/scss/bootstrap.scss";
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: $white-dark;
+}

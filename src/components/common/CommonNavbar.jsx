@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import '../../style/navbar.scss';
 
-class NavBar extends Component {
+class CommonNavbar extends Component {
     state = { };
   
     render() {
@@ -28,4 +28,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default CommonNavbar;

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-import NavBar from  "../common/NavBar.jsx";
+import CommonNavbar from  "../common/CommonNavbar.jsx";
+import CommonFooter from  "../common/CommonFooter.jsx";
 
 import '../../style/profile_provider.scss';
 
@@ -12,8 +13,9 @@ class PageProfileProvider extends Component {
     render() {
       return (
         <React.Fragment>
-            <NavBar />
+            <CommonNavbar />
             <p>PROVIDER PROFILE</p>
+            <CommonFooter />
         </React.Fragment>
       );
     }
