@@ -1,5 +1,7 @@
 $white-dark: #F2F2F2;
 $white: #FFF;
+$black: #000;
+$green-dark: #00AA00;
 $theme-colors: (
   "primary": hsl(145, 100%, 33%),
   "danger": #ff4136
@@ -15,4 +17,18 @@ html, body {
 
 body {
     background: $white-dark;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.anchor-asis {
+    text-decoration: none;
+    color: inherit;
+}
+
+.anchor-asis:hover, .anchor-asis:active {
+    text-decoration: none;
+    color: inherit;
 }

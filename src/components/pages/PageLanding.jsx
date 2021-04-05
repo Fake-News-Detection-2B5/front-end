@@ -15,7 +15,7 @@ class PageLanding extends Component {
         <React.Fragment>
             <CommonNavbar />
             <p>LANDING</p>
-            <CommonFooter />
+            <CommonFooter fixed />
         </React.Fragment>
       );
     }

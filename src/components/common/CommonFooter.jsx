@@ -14,7 +14,7 @@ class CommonFooter extends Component {
     render() {
       return (
         <React.Fragment>
-            <footer>
+            <footer className={this.props.fixed ? "footer-fixed" : ""}>
                 <div className="footer-container">
                     <div>
                         Contact:
@@ -29,13 +29,13 @@ class CommonFooter extends Component {
                     {
                         this.state.showFAQ ? 
                         <LinkContainer to="/faq">
-                            <Button variant="primary">
+                            <Button variant="primary" size="sm">
                                 FAQ
                             </Button>
                         </LinkContainer>
                         :
                         <LinkContainer to="/">
-                            <Button variant="primary">
+                            <Button variant="primary" size="sm">
                                 Home
                             </Button>
                         </LinkContainer>

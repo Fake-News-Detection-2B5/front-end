@@ -10,13 +10,13 @@ class CommonNavbar extends Component {
     render() {
       return (
         <React.Fragment>
-            <Navbar bg="white" expand="sm" className="border-bottom">
+            <Navbar bg="white" expand="sm" className="sticky-top border-bottom">
                 <LinkContainer to="/">
                     <Navbar.Brand>
                         <img
                             className="image-brand"
-                            width="50"
-                            height="50"
+                            width="32"
+                            height="32"
                             src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
                             alt="Brand"
                             />
