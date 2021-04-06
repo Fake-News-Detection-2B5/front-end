@@ -39,7 +39,7 @@ html, body {
 
 #account-settings-container {
     background: #cdd1cc94;
-    margin: 10%;
+    margin: 5% 10%;
     padding: 10px;
 }
 
@@ -58,5 +58,43 @@ html, body {
 
 #preferences-settings-container {
     background: #cdd1cc94;
+
+    padding: 10px;
+    margin: 5% 10%;
 }
 
+.preference-provider {
+    background: #ff9900;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 2%;
+}
+
+.preference-provider img {
+    margin: 1%;
+}
+
+
+.preference-provider-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preference-provider-info p {
+    margin-left: 45%;
+    width: 100%;
+
+    font-size: 2em;
+}
+
+.preference-provider-info p:first-child {
+    font-weight: bold;
+}
+
+#settings-save-btn {
+    margin-left: 90%;
+    width: 10%;
+}

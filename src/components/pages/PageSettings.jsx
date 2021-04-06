@@ -43,11 +43,40 @@ class PageSettings extends Component {
           </Tab>
           <Tab eventKey="preferences" title="Preferences Settings">
             <div id="preferences-settings-container">
-              <div className="preference-provider">
 
+              <div className="preference-provider">
+                <img src="public\res\img\dummy_user.png" width="128" height="128"/>
+                <div className="preference-provider-info">
+                  <p> rating fenomenal</p>
+                  <p> provider 1</p>
+                </div>
               </div>
 
-              <Button> Save settings</Button>
+              <div className="preference-provider">
+              <img src="public\res\img\dummy_user.png" width="128" height="128"/>
+                <div className="preference-provider-info">
+                  <p> rating fenomenal</p>
+                  <p> provider 2</p>
+                </div>
+              </div>
+
+              <div className="preference-provider">
+              <img src="public\res\img\dummy_user.png" width="128" height="128"/>
+                <div className="preference-provider-info">
+                  <p> rating fenomenal</p>
+                  <p> provider 3</p>
+                </div>
+              </div>
+
+              <div className="preference-provider">
+              <img src="public\res\img\dummy_user.png" width="128" height="128"/>
+                <div className="preference-provider-info">
+                  <p> rating fenomenal</p>
+                  <p> provider 4</p>
+                </div>
+              </div>
+
+              <Button id="settings-save-btn"> Save settings</Button>
             </div>
           </Tab>
         </Tabs>
