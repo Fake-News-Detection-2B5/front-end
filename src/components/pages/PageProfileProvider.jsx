@@ -15,7 +15,7 @@ class PageProfileProvider extends Component {
         <React.Fragment>
             <CommonNavbar />
             <p>PROVIDER PROFILE</p>
-            <CommonFooter />
+            <CommonFooter fixed />
         </React.Fragment>
       );
     }

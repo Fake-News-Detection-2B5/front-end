@@ -13,7 +13,7 @@ class PageFAQ extends Component {
       return (
         <React.Fragment>
             <p>FAQ</p>
-            <CommonFooter showFAQ={false} />
+            <CommonFooter showFAQ={false} fixed />
         </React.Fragment>
       );
     }

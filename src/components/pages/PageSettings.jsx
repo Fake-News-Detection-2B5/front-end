@@ -15,7 +15,7 @@ class PageSettings extends Component {
         <React.Fragment>
             <CommonNavbar />
             <p>SETTINGS</p>
-            <CommonFooter />
+            <CommonFooter fixed />
         </React.Fragment>
       );
     }

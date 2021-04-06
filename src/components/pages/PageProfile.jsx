@@ -15,7 +15,7 @@ class PageProfile extends Component {
         <React.Fragment>
             <CommonNavbar />
             <p>PROFILE</p>
-            <CommonFooter />
+            <CommonFooter fixed />
         </React.Fragment>
       );
     }
