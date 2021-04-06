@@ -1,1 +1,62 @@
 @import "./style.scss";
+
+html, body {
+    overflow: auto;
+}
+
+.settings-tab {
+    width: 40%;
+    margin: 0 auto;
+}
+
+#photo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10%;
+    
+}
+
+#password-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10%;
+}
+
+#bio-container {
+    margin-bottom: 10px;
+    margin-left: 20%;
+    margin-top: 10%;
+    width: 60%;
+}
+
+.settings-button {
+    margin-left: 5%;
+}
+
+#account-settings-container {
+    background: #cdd1cc94;
+    margin: 10%;
+    padding: 10px;
+}
+
+#bio-button {
+    float: right;
+}
+
+#bio-text-container {
+    background: #bddff5;
+    padding: 10px;
+}
+
+#pass-button {
+    margin-left: 15%;
+}
+
+#preferences-settings-container {
+    background: #cdd1cc94;
+}
+
