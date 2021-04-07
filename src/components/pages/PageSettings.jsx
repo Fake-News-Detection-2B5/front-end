@@ -21,7 +21,7 @@ class PageSettings extends Component {
             <div id="account-settings-container">
               <div id="account-container">
                 <div id="photo-container" className="justify-content-center">
-                  <img src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"} width="256" height="256" />
+                  <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"} width="256" height="256" />
                   <Button className="settings-button"> Change photo </Button>
                 </div>
               </div>
@@ -45,7 +45,7 @@ class PageSettings extends Component {
             <div id="preferences-settings-container">
 
               <div className="preference-provider">
-                <img src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
+                <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
                 <div className="preference-provider-info">
                   <p> rating fenomenal</p>
                   <p> provider 1</p>
@@ -53,7 +53,7 @@ class PageSettings extends Component {
               </div>
 
               <div className="preference-provider">
-              <img src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
+              <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
                 <div className="preference-provider-info">
                   <p> rating fenomenal</p>
                   <p> provider 2</p>
@@ -61,7 +61,7 @@ class PageSettings extends Component {
               </div>
 
               <div className="preference-provider">
-              <img src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
+              <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
                 <div className="preference-provider-info">
                   <p> rating fenomenal</p>
                   <p> provider 3</p>
@@ -69,7 +69,7 @@ class PageSettings extends Component {
               </div>
 
               <div className="preference-provider">
-              <img src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
+              <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} width="128" height="128"/>
                 <div className="preference-provider-info">
                   <p> rating fenomenal</p>
                   <p> provider 4</p>
