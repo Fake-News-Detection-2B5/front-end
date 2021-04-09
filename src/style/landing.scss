@@ -3,11 +3,12 @@
 panel {
   display: grid;
   width: 100%;
-  height: 100%;
+  height: 95%;
+  margin-top: 5%;
   grid-column-start: 9;
   grid-column-end: 12;
   grid-row-start: 3;
-  grid-row-end: 9;
+  grid-row-end: 8;
 }
 
 grid-image {
@@ -20,7 +21,7 @@ grid-image {
   grid-row-end: 10;
 }
 
-full-view {
+#fullview {
   display: block;
   width: 100%;
   height: 100%;
@@ -60,12 +61,12 @@ btn-register {
 
 #button-radius-right {
   border-radius: 0px 3px 0px 0px;
-  height: 50%;
+  height: 100%;
 }
 
 #button-radius-left {
   border-radius: 3px 0px 0px 0px;
-  height: 50%;
+  height: 100%;
 }
 
 panel-content-wrapper {
@@ -89,6 +90,7 @@ panel-content {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 grid-template {
@@ -97,4 +99,27 @@ grid-template {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(10, 1fr);
+}
+
+#fixed-button {
+  display: block;
+  width: auto;
+  height: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#inputfullwidth {
+  width: 80%;
+  display: block;
+}
+
+phantom-div {
+  display: block;
+  height: calc(1.5em + 0.75rem + 2px);
+  width: 80%;
+  visibility: hidden;
+  margin-bottom: 1rem;
 }

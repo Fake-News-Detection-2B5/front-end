@@ -10,21 +10,21 @@ class RegisterForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <Form>
+        <Form id="fullview">
           <panel-content>
-            <Form.Group controlId="formUsernameRegister">
+            <Form.Group controlId="formUsernameRegister" id="inputfullwidth">
               <Form.Control type="username" placeholder="Enter username" />
             </Form.Group>
-            <Form.Group controlId="formEmailRegister">
+            <Form.Group controlId="formEmailRegister" id="inputfullwidth">
               <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>
-            <Form.Group controlId="formPasswordRegister">
+            <Form.Group controlId="formPasswordRegister" id="inputfullwidth">
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            <Form.Group controlId="formPasswordConfirm">
+            <Form.Group controlId="formPasswordConfirm" id="inputfullwidth">
               <Form.Control type="password" placeholder="Confirm Password" />
             </Form.Group>
-            <Button variant="primary" type="submit" size="lg">
+            <Button id="fixed-button" variant="primary" type="submit" size="lg">
               Submit
             </Button>
           </panel-content>

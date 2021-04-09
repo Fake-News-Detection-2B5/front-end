@@ -11,18 +11,25 @@ class LoginForm extends Component {
     return (
       <React.Fragment>
         <panel-content>
-          <Form className="full-width">
+          <Form id="fullview">
             <panel-content>
-              <Form.Group controlId="formEmail">
+              <phantom-div />
+              <Form.Group controlId="formEmail" id="inputfullwidth">
                 <Form.Control
                   type="email"
                   placeholder="Enter email or username"
                 />
               </Form.Group>
-              <Form.Group controlId="formPassword">
+              <Form.Group controlId="formPassword" id="inputfullwidth">
                 <Form.Control type="password" placeholder="Password" />
               </Form.Group>
-              <Button variant="primary" type="submit" size="lg">
+              <phantom-div />
+              <Button
+                variant="primary"
+                id="fixed-button"
+                type="submit"
+                size="lg"
+              >
                 Submit
               </Button>
             </panel-content>
