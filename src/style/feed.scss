@@ -4,3 +4,11 @@ main {
     width: 40%;
     margin: 0 auto;
 }
+
+.post-container {
+    transition: 0.2s transform;
+}
+
+.post-container:hover {
+    transform: scale(1.025);
+}
