@@ -1,1 +1,48 @@
 @import "./style.scss";
+@import "./feed.scss";
+
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+}
+
+#profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#bio-container {
+    margin: 0;
+}
+
+.photo-border {
+    border: 1px solid #000000;
+}
+
+#profile-username {
+    margin-left: 10%;
+    width: 100%;
+}
+
+.profile-bio-button {
+    margin-left: 5%;
+}
+
+#bio-button {
+    float: right;
+}
+
+#bio-text-container {
+    background: #bddff5;
+    padding: 10px;
+}
+
+#horizontal-line {
+    border: 5px solid #ff0000;
+}
