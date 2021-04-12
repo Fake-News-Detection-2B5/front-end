@@ -89,7 +89,7 @@ class PageProfileProvider extends Component {
           </main>
         </div>
 
-        <CommonFooter fixed />
+        <CommonFooter />
       </React.Fragment>
     );
   }
