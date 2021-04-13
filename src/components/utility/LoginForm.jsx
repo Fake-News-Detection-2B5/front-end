@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 import "../../style/navbar.scss";
 
@@ -24,6 +25,7 @@ class LoginForm extends Component {
                 <Form.Control type="password" placeholder="Password" />
               </Form.Group>
               <phantom-div />
+              <LinkContainer to="/feed">
               <Button
                 variant="primary"
                 id="fixed-button"
@@ -32,6 +34,7 @@ class LoginForm extends Component {
               >
                 Submit
               </Button>
+              </LinkContainer>
             </panel-content>
           </Form>
         </panel-content>

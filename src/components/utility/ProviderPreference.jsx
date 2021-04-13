@@ -11,19 +11,20 @@ class ProviderPreference extends Component {
         <div className="preference-provider">
           <img
             className="photo-border"
-            src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"}
+            src={this.props.avatar}
             width="128"
             height="128"
           />
           <div className="preference-provider-info">
-            <p> rating fenomenal</p>
-            <p> provider 1</p>
+            <p> {this.props.name} </p>
+            <p> Credibility: {this.props.credibility}% </p>
+            
           </div>
           <Form className="ml-auto subscribe-form">
-            <div key={`default-checkbox`} className="mb-3">
+            <div key={`provider-checkbox` + this.props.name} className="mb-3">
               <Form.Check
                 type="checkbox"
-                id={`default-checkbox`}
+                id={`provider-checkbox` + this.props.name}
                 label={`Subscribed`}
               />
             </div>

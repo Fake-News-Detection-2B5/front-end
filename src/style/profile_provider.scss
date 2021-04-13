@@ -17,17 +17,15 @@
     justify-content: center;
 }
 
-#bio-container {
-    margin: 0;
+#bio-container-provider {
+    margin-top: 30px;
+    width: 40%; 
 }
 
 .photo-border {
+    width: 192px;
+    height: 192x;
     border: 1px solid #000000;
-}
-
-#profile-username {
-    margin-left: 10%;
-    width: 100%;
 }
 
 .profile-bio-button {
@@ -44,5 +42,12 @@
 }
 
 #horizontal-line {
-    border: 5px solid #ff0000;
+    border: 1px solid $white-darker;
+}
+
+#provider-profile-name-credibility {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
 }

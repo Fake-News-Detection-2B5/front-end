@@ -32,7 +32,7 @@ class CommonNavbar extends Component {
                                             className="image-brand"
                                             width="32"
                                             height="32"
-                                            src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
+                                            src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"}
                                             alt="Username"
                                         />
                                         <span id="username">

@@ -16,14 +16,13 @@ class PageProfile extends Component {
             <CommonNavbar authenticated />
             <div id="profile-container">
               <div id="profile-header">
-                <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user2.png"} alt="User avatar" />
+                <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"} alt="User avatar" />
 
                 <div id="profile-username">
                   <h1> Username here </h1>
                 </div>
               </div>
-              <div id="bio-container" className="justify-content-center">
-                <Button className="profile-bio-button " id="bio-button">Change Bio</Button>
+              <div id="bio-container-profile" className="justify-content-center">
                 <div id="bio-text-container" >
                   lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea vitae, eius soluta ut ipsa in, cum voluptate reprehenderit tenetur explicabo consequuntur quas beatae voluptas eligendi quisquam? Eius qui enim ullam!
                 </div>

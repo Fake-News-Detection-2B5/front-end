@@ -9,7 +9,17 @@ import "../../style/settings.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
 class PageSettings extends Component {
-  state = {};
+  state = {
+    providers: [{
+      name: "Digi24",
+      credibility: "99",
+      avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png"
+    }, {
+      name: "Digi24",
+      credibility: "99",
+      avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png"
+    }]
+  };
 
   render() {
     return (
@@ -71,12 +81,9 @@ class PageSettings extends Component {
             <Tab eventKey="preferences" title="Preferences Settings">
               <div className="tab-custom-container">
                 <div id="preferences-settings-container">
-                  <ProviderPreference />
-                  <ProviderPreference />
-                  <ProviderPreference />
-                  <ProviderPreference />
-                  <ProviderPreference />
-
+                  {this.state.providers.map(provider => {
+                    return <ProviderPreference {...provider} />
+                  })}
                   <Button id="settings-save-btn"> Save settings</Button>
                 </div>
               </div>

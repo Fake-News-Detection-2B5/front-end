@@ -14,7 +14,7 @@ class PageFeed extends Component {
         {
           provider: {
             avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-            name: "Digi"
+            name: "Digi24"
           },
           title: "Se fac eforturi uriase pentru mutarea navei care blocheaza Canalul Suez. Operatiunea, insa, ar putea dura cateva saptamani",
           description: "Continua eforturile pentru mutarea Ever Given, nava-container cu o lungime de 400 de metri care blocheaza Canalul Suez. Sunt utilizate excavatoare pentru indepartarea nisipului si noroiului de la prova navei, in timp ce remorcherele sunt utilizate pentru a o muta.",
@@ -25,7 +25,7 @@ class PageFeed extends Component {
         {
           provider: {
             avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-            name: "Digi"
+            name: "Digi24"
           },
           title: "Se fac eforturi uriase pentru mutarea navei care blocheaza Canalul Suez. Operatiunea, insa, ar putea dura cateva saptamani",
           description: "Continua eforturile pentru mutarea Ever Given, nava-container cu o lungime de 400 de metri care blocheaza Canalul Suez. Sunt utilizate excavatoare pentru indepartarea nisipului si noroiului de la prova navei, in timp ce remorcherele sunt utilizate pentru a o muta.",
@@ -36,7 +36,7 @@ class PageFeed extends Component {
         {
           provider: {
             avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-            name: "Digi"
+            name: "Digi24"
           },
           title: "Se fac eforturi uriase pentru mutarea navei care blocheaza Canalul Suez. Operatiunea, insa, ar putea dura cateva saptamani",
           description: "Continua eforturile pentru mutarea Ever Given, nava-container cu o lungime de 400 de metri care blocheaza Canalul Suez. Sunt utilizate excavatoare pentru indepartarea nisipului si noroiului de la prova navei, in timp ce remorcherele sunt utilizate pentru a o muta.",
@@ -47,7 +47,7 @@ class PageFeed extends Component {
         {
           provider: {
             avatar: "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-            name: "Digi"
+            name: "Digi24"
           },
           title: "Se fac eforturi uriase pentru mutarea navei care blocheaza Canalul Suez. Operatiunea, insa, ar putea dura cateva saptamani",
           description: "Continua eforturile pentru mutarea Ever Given, nava-container cu o lungime de 400 de metri care blocheaza Canalul Suez. Sunt utilizate excavatoare pentru indepartarea nisipului si noroiului de la prova navei, in timp ce remorcherele sunt utilizate pentru a o muta.",
@@ -61,7 +61,7 @@ class PageFeed extends Component {
     render() {
       return (
         <React.Fragment>
-            <CommonNavbar />
+            <CommonNavbar authenticated />
             <main>
               {this.state.posts.map(post => {
                 return <CommonPost {...post} />
