@@ -1,1 +1,44 @@
 @import "./style.scss";
+
+#faq-header-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#faq-logo-container {
+    padding: 10px;
+}
+
+#faq-title-container {
+    padding: 10px;
+}
+
+#faq-title-container > h1 {
+    font-size: 5em;
+    line-height: 1.4em;
+    color: $purple-dark;
+}
+
+#faq-logo {
+    border: 1px solid $black
+}
+
+.faq-question-header > span {
+    font-size: 2.5em;
+}
+
+main {
+    width: 100%;
+    padding: 30px;
+    margin-bottom: 5%;
+}
+
+.faq-question-body > span {
+    font-size: 1.4em;
+}
+
+.faq-accordion {
+    box-shadow: $shadow-small;
+}

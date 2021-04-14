@@ -1,15 +1,16 @@
 $white-dark: #f2f2f2;
 $white-darker: #dddddd;
-$shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-$shadow-small: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.19);
 $white: #fff;
 $black: #000;
 $gray: rgba(0, 0, 0, 0.76);
 $green-dark: #00aa00;
+$purple-dark: #4b0061;
 $theme-colors: (
   "primary": hsl(145, 100%, 33%),
   "danger": #ff4136,
 );
+$shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$shadow-small: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.19);
 
 @import "~bootstrap/scss/bootstrap.scss";
 
