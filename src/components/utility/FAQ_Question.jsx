@@ -10,7 +10,7 @@ class FAQ_Question extends Component {
             <Card>
                 <Accordion.Toggle className="faq-question-header" as={Card.Header} eventKey={this.props.count}>
                     <span>
-                        {this.props.count}. Question {this.props.count}
+                        {this.props.count}. {this.props.question}
                     </span>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={this.props.count}>
