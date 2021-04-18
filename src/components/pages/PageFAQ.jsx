@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Accordion } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 import CommonFooter from  "../common/CommonFooter.jsx";
 import FAQ_Question from "../utility/FAQ_Question.jsx";
@@ -97,13 +98,15 @@ class PageFAQ extends Component {
         <React.Fragment>
             <div id="faq-header-container">
               <div id="faq-logo-container">
-                <img
-                  id="faq-logo" 
-                  src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
-                  alt="brand logo"
-                  width="128"
-                  height="128"
+                <LinkContainer to="/">
+                  <img
+                    id="faq-logo" 
+                    src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
+                    alt="brand logo"
+                    width="128"
+                    height="128"
                   />
+                </LinkContainer>
               </div>
               <div id="faq-title-container">
                 <h1> 
@@ -121,7 +124,7 @@ class PageFAQ extends Component {
             </main>
 
 
-            <CommonFooter showFAQ={false} fixed />
+            <CommonFooter showFAQ={false} />
         </React.Fragment>
       );
     }

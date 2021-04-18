@@ -4,11 +4,12 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
 }
 
 #faq-logo-container {
     padding: 10px;
+    cursor: pointer;
 }
 
 #faq-title-container {
@@ -18,11 +19,15 @@
 #faq-title-container > h1 {
     font-size: 5em;
     line-height: 1.4em;
-    color: $purple-dark;
+    color: $black;/*$purple-dark;*/
 }
 
 #faq-logo {
     border: 1px solid $black
+}
+
+.faq-question-header {
+    cursor: pointer;
 }
 
 .faq-question-header > span {

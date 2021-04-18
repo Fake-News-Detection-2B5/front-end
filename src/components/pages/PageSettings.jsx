@@ -153,7 +153,7 @@ class PageSettings extends Component {
                     }
 
                     {
-                      this.state.pagination.index == 1 && this.state.pagination.count > 2 ?
+                      this.state.pagination.index === 1 && this.state.pagination.count > 2 ?
                         <Pagination.Item onClick={this.handlePaginationFactory(this.state.pagination.index + 2)}>{this.state.pagination.index + 2}</Pagination.Item> :
                         ""
                     }
