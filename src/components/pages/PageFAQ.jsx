@@ -112,7 +112,7 @@ class PageFAQ extends Component {
               </div>
             </div>
 
-            <main>
+            <main id="faq_main">
               <Accordion className="faq-accordion">
                 {this.state.questions.map(question => {
                   return <FAQ_Question {...question} /> 
