@@ -48,3 +48,11 @@ img {
   text-decoration: none;
   color: inherit;
 }
+
+.rounded-img {
+  border-radius: 50%;
+}
+
+.shadow-img {
+  box-shadow: $shadow-small;
+}

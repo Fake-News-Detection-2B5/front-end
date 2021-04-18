@@ -100,7 +100,8 @@ class PageFAQ extends Component {
               <div id="faq-logo-container">
                 <LinkContainer to="/">
                   <img
-                    id="faq-logo" 
+                    id="faq-logo"
+                    className="rounded-img" 
                     src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
                     alt="brand logo"
                     width="128"

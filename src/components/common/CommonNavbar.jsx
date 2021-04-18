@@ -14,7 +14,7 @@ class CommonNavbar extends Component {
                 <LinkContainer to="/">
                     <Navbar.Brand>
                         <img
-                            className="image-brand"
+                            className="image-brand rounded-img shadow-img"
                             width="32"
                             height="32"
                             src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
