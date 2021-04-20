@@ -5,10 +5,27 @@ import { Button } from "react-bootstrap";
 import CommonNavbar from  "../common/CommonNavbar.jsx";
 import CommonFooter from  "../common/CommonFooter.jsx";
 
+import session from "../../util/session.js";
+
 import '../../style/profile.scss';
 
 class PageProfile extends Component {
-    state = { };
+    state = {
+      sessionInterval: null
+    };
+
+    componentDidMount = () => {
+      if(session.isReady()) {
+        this.setState();
+      } else {
+        this.state.sessionInterval = setInterval(() => {
+          if(session.isReady()) {
+            clearInterval(this.state.sessionInterval);
+            this.setState();
+          }
+        }, 10);
+      }
+    }
   
     render() {
       return (
@@ -19,12 +36,12 @@ class PageProfile extends Component {
                 <img className="photo-border" src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"} alt="User avatar" />
 
                 <div id="profile-username">
-                  <h1> Username here </h1>
+                  <h1>{session.get().username}</h1>
                 </div>
               </div>
               <div id="bio-container-profile" className="justify-content-center">
                 <div id="bio-text-container" >
-                  lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea vitae, eius soluta ut ipsa in, cum voluptate reprehenderit tenetur explicabo consequuntur quas beatae voluptas eligendi quisquam? Eius qui enim ullam!
+                  {session.get().bio}
                 </div>
               </div>
             </div>

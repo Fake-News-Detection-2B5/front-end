@@ -8,13 +8,16 @@ import PageProfileProvider from "./pages/PageProfileProvider";
 import PageSettings from "./pages/PageSettings";
 import PageFAQ from "./pages/PageFAQ";
 
+import session from "../util/session.js";
+
 class App extends Component {
   state = { /*dummy: false*/ };
   constructor() {
     super();
-
+    session.init();
     /*Session.getFromCookies();
     Session.onUpdate = this.handleSessionUpdate;*/
+
   }
 
   /*handleSessionUpdate = () => {

@@ -9,6 +9,7 @@ import "../../style/settings.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
 import request from "../../util/request.js";
+import session from "../../util/session.js";
 
 const PAGINATION_VISIBLE_COUNT = 3;
 const PAGINATION_PROVIDERS_PER_PAGE = 3;
@@ -23,7 +24,8 @@ class PageSettings extends Component {
     pagination: {
       index: 1,
       count: 0
-    }
+    },
+    sessionInterval: null
   };
 
   componentDidMount = () => {
@@ -45,6 +47,17 @@ class PageSettings extends Component {
       }).catch((err) => {
         console.error(err);
     });
+
+    if(session.isReady()) {
+      this.setState();
+    } else {
+      this.state.sessionInterval = setInterval(() => {
+        if(session.isReady()) {
+          clearInterval(this.state.sessionInterval);
+          this.setState();
+        }
+      }, 10);
+    }
   }
 
   updateProviders = () => {
@@ -141,11 +154,7 @@ class PageSettings extends Component {
                       Change Bio
                     </Button>
                     <div id="bio-text-container">
-                      lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit. Ea vitae, eius soluta ut
-                      ipsa in, cum voluptate reprehenderit tenetur explicabo
-                      consequuntur quas beatae voluptas eligendi quisquam? Eius
-                      qui enim ullam!
+                      {session.get().bio}
                     </div>
                   </div>
                 </div>

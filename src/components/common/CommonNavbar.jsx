@@ -4,8 +4,25 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import '../../style/navbar.scss';
 
+import session from "../../util/session.js";
+
 class CommonNavbar extends Component {
-    state = { };
+    state = {
+        sessionInterval: null
+    };
+
+    componentDidMount() {
+      if(session.isReady()) {
+        this.setState();
+      } else {
+        this.state.sessionInterval = setInterval(() => {
+          if(session.isReady()) {
+            clearInterval(this.state.sessionInterval);
+            this.setState();
+          }
+        }, 10);
+      }
+    }
   
     render() {
       return (
@@ -36,7 +53,7 @@ class CommonNavbar extends Component {
                                             alt="Username"
                                         />
                                         <span id="username">
-                                            Username
+                                            {session.get().username}
                                         </span>
                                     </React.Fragment>}
                                 >
