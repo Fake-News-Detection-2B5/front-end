@@ -35,9 +35,14 @@
     font-size: 0.7em;
 }
 
-.post-credibility {
+.post-credibility-good {
     padding-left: 5px;
     color: $green-dark;
+}
+
+.post-credibility-bad {
+    padding-left: 5px;
+    color: $red-dark;
 }
 
 .post-body {

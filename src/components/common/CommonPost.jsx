@@ -29,7 +29,7 @@ class CommonPost extends Component {
                                 (feedback)
                             </a>
                         </LinkContainer>
-                        <span className="post-credibility">
+                        <span className={`post-credibility-${parseInt(this.props.fake) < 50 ? 'good' : 'bad'}`}>
                             {this.props.fake}% fake
                         </span>
                     </div>

@@ -9,6 +9,8 @@ routes['API_PROVIDER'] = '/provider';
 routes['API_PROVIDER_COUNT'] = `${routes.API_PROVIDER}/getCount`;
 routes['API_PROVIDER_GET_INTERVAL'] = `${routes.API_PROVIDER}/getInterval`;
 routes['API_PROVIDER_GET_BY_NAME'] = `${routes.API_PROVIDER}/getByName`;
+routes['API_POST'] = '/post';
+routes['API_POST_GET_INTERVAL'] = `${routes.API_POST}/getInterval`;
 
 export default {
     routes: routes,
