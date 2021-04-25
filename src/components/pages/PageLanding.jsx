@@ -2,35 +2,31 @@ import React, { Component } from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
 
 import CommonFooter from "../common/CommonFooter.jsx";
-import LoginForm from "../utility/LoginForm.jsx";
-import RegisterForm from "../utility/RegisterForm.jsx";
+import Animation from "../utility/Animation-btn.jsx";
 
 import "../../style/landing.scss";
 
 class PageLanding extends Component {
   state = {
-    item: [<LoginForm />],
-    isLogin: true,
+    elem: <div></div>,
   };
 
-  handleShowLogin = () => {
-    const newItem = [<LoginForm />];
-    this.setState({ item: newItem, isLogin: true });
-    console.log("Updating!");
+  handleAnimation = () => {
+    const newItem = <div id="fancy-btn"></div>;
+    this.setState({ elem: newItem });
+    console.log("Se intampla ceva!");
   };
 
-  handleShowRegister = () => {
-    const newItem = [<RegisterForm />];
-    this.setState({ item: newItem, isLogin: false });
-    console.log("Updating!");
+  handleAnimationOff = () => {
+    const newItem = <div></div>;
+    this.setState({ elem: newItem });
   };
 
   render() {
-    console.log("App - Rendered");
     return (
       <React.Fragment>
         <grid-template>
-          <grid-image>
+          <grid-image onMouseOver={this.handleAnimationOff}>
             <img
               src={process.env.PUBLIC_URL + "res/img/landingpage.svg"}
               alt="React Logo"
@@ -38,37 +34,15 @@ class PageLanding extends Component {
               height="100%"
             />
           </grid-image>
-          <panel>
-            <panelGrid>
-              <btn-login>
-                <Button
-                  id="button-radius-left"
-                  onClick={this.handleShowLogin}
-                  type="button"
-                  variant={this.state.isLogin ? "success" : "secondary"}
-                  size="lg"
-                  block
-                >
-                  Login
-                </Button>
-              </btn-login>
-              <btn-register>
-                <Button
-                  id="button-radius-right"
-                  onClick={this.handleShowRegister}
-                  type="button"
-                  variant={this.state.isLogin ? "secondary" : "success"}
-                  size="lg"
-                  block
-                >
-                  Register
-                </Button>
-              </btn-register>
-              <panel-content-wrapper>
-                {this.state.item[0]}
-              </panel-content-wrapper>
-            </panelGrid>
-          </panel>
+          {this.state.elem}
+          <btn-login onMouseOver={this.handleAnimation}>
+            <Button id="btn-heigth" type="button" size="lg" block>
+              Login or Register
+            </Button>
+          </btn-login>
+          <div id="top-remove" onMouseOver={this.handleAnimationOff}></div>
+          <div id="bottom-remove" onMouseOver={this.handleAnimationOff}></div>
+          <div id="right-remoe " onMouseOver={this.handleAnimationOff}></div>
         </grid-template>
         <CommonFooter fixed />
       </React.Fragment>
