@@ -7,6 +7,7 @@ import PageProfile from "./pages/PageProfile";
 import PageProfileProvider from "./pages/PageProfileProvider";
 import PageSettings from "./pages/PageSettings";
 import PageFAQ from "./pages/PageFAQ";
+import PageSetup from "./pages/PageSetup";
 
 import session from "../util/session.js";
 
@@ -39,6 +40,8 @@ class App extends Component {
           <Route exact path="/settings" component={PageSettings} />
 
           <Route exact path="/faq" component={PageFAQ} />
+
+          <Route exact path="/setup" component={PageSetup} />
 
           {/*
               Redirects
