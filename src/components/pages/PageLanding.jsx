@@ -1,53 +1,42 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
 
 import CommonFooter from "../common/CommonFooter.jsx";
 import Animation from "../utility/Animation-btn.jsx";
+import Auth0Btn from "../utility/Auth0Btn.jsx";
+import { Redirect } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "../../style/landing.scss";
 
-class PageLanding extends Component {
-  state = {
-    elem: <div></div>,
-  };
+function PageLanding() {
+  const [elem, setElem] = useState(0);
+  const { isAuthenticated } = useAuth0();
 
-  handleAnimation = () => {
-    const newItem = <div id="fancy-btn"></div>;
-    this.setState({ elem: newItem });
-    console.log("Se intampla ceva!");
-  };
-
-  handleAnimationOff = () => {
-    const newItem = <div></div>;
-    this.setState({ elem: newItem });
-  };
-
-  render() {
-    return (
-      <React.Fragment>
-        <grid-template>
-          <grid-image onMouseOver={this.handleAnimationOff}>
-            <img
-              src={process.env.PUBLIC_URL + "res/img/landingpage.svg"}
-              alt="React Logo"
-              width="100%"
-              height="100%"
-            />
-          </grid-image>
-          {this.state.elem}
-          <btn-login onMouseOver={this.handleAnimation}>
-            <Button id="btn-heigth" type="button" size="lg" block>
-              Login or Register
-            </Button>
-          </btn-login>
-          <div id="top-remove" onMouseOver={this.handleAnimationOff}></div>
-          <div id="bottom-remove" onMouseOver={this.handleAnimationOff}></div>
-          <div id="right-remoe " onMouseOver={this.handleAnimationOff}></div>
-        </grid-template>
-        <CommonFooter fixed />
-      </React.Fragment>
-    );
-  }
+  return isAuthenticated ? (
+    <Redirect to="/feed" />
+  ) : (
+    <React.Fragment>
+      <grid-template>
+        <grid-image onMouseOver={() => setElem(<div></div>)}>
+          <img
+            src={process.env.PUBLIC_URL + "res/img/landingpage.svg"}
+            alt="React Logo"
+            width="100%"
+            height="100%"
+          />
+        </grid-image>
+        {elem}
+        <btn-login onMouseOver={() => setElem(<Animation />)}>
+          <Auth0Btn />
+        </btn-login>
+        <div id="top-remove" onMouseOver={() => setElem(<div></div>)}></div>
+        <div id="bottom-remove" onMouseOver={() => setElem(<div></div>)}></div>
+        <div id="right-remoe " onMouseOver={() => setElem(<div></div>)}></div>
+      </grid-template>
+      <CommonFooter fixed />
+    </React.Fragment>
+  );
 }
 
 export default PageLanding;
