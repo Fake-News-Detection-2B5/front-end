@@ -20,7 +20,8 @@ class PageSettings extends Component {
       count: 0,
       list: []
     },
-    searchQuery: "",
+    query: "",       // chanes when pressing search
+    searchQuery: "", // changes with key presses
     pagination: {
       index: 1,
       count: 0
@@ -29,24 +30,7 @@ class PageSettings extends Component {
   };
 
   componentDidMount = () => {
-    request.get(request.routes.API_PROVIDER_COUNT)
-      .then((res) => {
-        let providerCount = parseInt(res.data);
-        this.setState({
-          provider: {
-            ...this.state.provider,
-            count: providerCount
-          },
-          pagination: {
-            ...this.state.pagination,
-            count: (providerCount / PAGINATION_PROVIDERS_PER_PAGE) + (providerCount % PAGINATION_PROVIDERS_PER_PAGE > 0 ? 1 : 0)
-          }
-        });
-
-        this.updateProviders();
-      }).catch((err) => {
-        console.error(err);
-    });
+    this.updateProviderCount();
 
     if(session.isReady()) {
       this.setState();
@@ -61,10 +45,12 @@ class PageSettings extends Component {
   }
 
   updateProviders = () => {
-    request.get(request.routes.API_PROVIDER_GET_INTERVAL, {
+    request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH : request.routes.API_PROVIDER_GET_INTERVAL, {
       skip: PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1),
-      count: PAGINATION_PROVIDERS_PER_PAGE
+      count: Math.min(PAGINATION_PROVIDERS_PER_PAGE, this.state.provider.count - PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1)),
+      query: this.state.query
     }).then((res) => {
+      console.log(res.data);
         this.setState({
           provider: {
             ...this.state.provider,
@@ -73,6 +59,46 @@ class PageSettings extends Component {
         })
       }).catch((err) => {
         console.error(err);
+    });
+  }
+
+  updateProviderCount = () => {
+    request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH_COUNT : request.routes.API_PROVIDER_COUNT, {
+      query: this.state.query
+    }).then((res) => {
+        let providerCount = parseInt(res.data);
+
+        this.setState({
+          provider: {
+            ...this.state.provider,
+            count: providerCount
+          },
+          pagination: {
+            ...this.state.pagination,
+            count: (Math.ceil(providerCount / PAGINATION_PROVIDERS_PER_PAGE))
+          }
+        });
+
+        this.updateProviders();
+      }).catch((err) => {
+        console.error(err);
+    });
+  }
+
+  updateProviderChecked = () => {
+    this.state.provider.list.map((provider, index) => {
+      request.get(request.routes.API_PREFERENCES_GET, {
+        uid: session.get().userId,
+        prov_id: provider.id
+      }).then((res) => {
+          let checked = parseInt(res.data);
+          
+          this.state.provider.list[index].checked = checked;
+          this.setState();
+          this.forceUpdate();
+        }).catch((err) => {
+          console.error(err);
+      });
     });
   }
 
@@ -101,11 +127,29 @@ class PageSettings extends Component {
   }
 
   handleSearch = () => {
-    console.log(`Search: ${this.props.searchQuery}`);
+    this.setState({
+      query: this.state.searchQuery
+    }, () => {
+      this.updateProviderCount();
+
+      console.log(`Search: ${this.state.query}`);
+
+      this.updateProviderCount();
+    })
   }
 
   handleSaveSettings = () => {
-    
+    this.state.provider.list.map((provider, index) => {
+      request.put(request.routes.API_PREFERENCES_UPDATE, {
+        uid: session.get().userId,
+        prov_id: provider.id,
+        status: provider.checked ? true : false
+      }).then((res) => {
+          console.log(res);
+        }).catch((err) => {
+          console.error(err);
+      });
+    });
   }
 
   render() {
@@ -170,11 +214,17 @@ class PageSettings extends Component {
                       Search
                     </Button>
                   </Form>
-                  {this.state.provider.list.length > 0 ?
-                    this.state.provider.list.map(provider => {
-                      return <ProviderPreference {...provider} />
-                    }) :
-                    <div id="settings-preferences-loading">Loading...</div>
+                  {
+                    this.state.provider.list.length > 0 ?
+                      this.state.provider.list.map((provider, index) => {
+                        return <ProviderPreference {...provider} onChange={() => {
+                            this.state.provider.list[index].checked = !this.state.provider.list[index].checked;
+
+                            this.setState();
+                            this.forceUpdate();
+                        }} checked={provider.checked ? true : false} />
+                      }) :
+                      <div id="settings-preferences-loading">Loading...</div>
                   }
                   <Pagination id="settings-preferences-pagination">
                     <Pagination.First onClick={this.handlePaginationFactory(1)} />

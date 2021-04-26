@@ -26,6 +26,8 @@ class ProviderPreference extends Component {
                 type="checkbox"
                 id={`provider-checkbox` + this.props.name}
                 label={`Subscribed`}
+                onChange={() => {this.props.onChange();}}
+                checked={this.props.checked}
               />
             </div>
           </Form>
