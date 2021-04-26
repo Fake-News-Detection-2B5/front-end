@@ -15,8 +15,8 @@ btn-login {
   text-align: center;
   grid-column-start: 9;
   grid-column-end: 11;
-  grid-row-start: 6;
-  grid-row-end: 7;
+  grid-row-start: 8;
+  grid-row-end: 9;
   padding: 0;
   margin: 0;
 }
@@ -40,11 +40,11 @@ grid-template {
   background-color: $white-dark;
   position: absolute;
   transform: rotate(30deg);
-  top: calc(48% - 16.8%);
+  top: calc(50%);
   opacity: 60%;
   left: 55%;
   animation-name: move-right;
-  animation-duration: 0.5s;
+  animation-duration: 0.35s;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
@@ -59,25 +59,74 @@ grid-template {
 }
 
 #top-remove {
-  display: block;
-  grid-column-start: 8;
+  display: grid;
+  grid-column-start: 7;
   grid-column-end: 13;
   grid-row-start: 1;
-  grid-row-end: 6;
+  grid-row-end: 8;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  grid-column-start: 2;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#info-bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  grid-column-start: 2;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 7;
+}
+
+#title-fnd {
+  font-size: 3vw;
+  margin: auto;
+}
+
+#website-logo {
+  display: block;
+  width: auto;
+  height: 8vh;
+  margin: 0px;
+  margin-left: 5%;
 }
 
 #bottom-remove {
   display: block;
-  grid-column-start: 8;
+  grid-column-start: 7;
   grid-column-end: 13;
-  grid-row-start: 7;
+  grid-row-start: 9;
   grid-row-end: 13;
 }
 
 #right-remove {
   display: block;
   grid-column-start: 11;
-  grid-column-end: 12;
-  grid-row-start: 1;
-  grid-row-end: 13;
+  grid-column-end: 13;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+
+#left-remove {
+  display: block;
+  grid-column-start: 7;
+  grid-column-end: 9;
+  grid-row-start: 8;
+  grid-row-end: 9;
 }
