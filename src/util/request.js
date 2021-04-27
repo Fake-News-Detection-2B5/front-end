@@ -6,6 +6,7 @@ const routes = {
 };
 
 routes['API_PROVIDER'] = '/provider';
+routes['API_PROVIDER_BY_ID'] = `${routes.API_PROVIDER}/getById`;
 routes['API_PROVIDER_COUNT'] = `${routes.API_PROVIDER}/getCount`;
 routes['API_PROVIDER_GET_INTERVAL'] = `${routes.API_PROVIDER}/getInterval`;
 routes['API_PROVIDER_SEARCH_COUNT'] = `${routes.API_PROVIDER}/searchCount`;

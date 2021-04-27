@@ -35,13 +35,13 @@ class App extends Component {
 
           <Route exact path="/profile" component={PageProfile} />
 
-          <Route exact path="/profile_provider" component={PageProfileProvider} />
-
           <Route exact path="/settings" component={PageSettings} />
 
           <Route exact path="/faq" component={PageFAQ} />
 
           <Route exact path="/setup" component={PageSetup} />
+
+          <Route exact path="/:providerId" component={PageProfileProvider} />
 
           {/*
               Redirects
