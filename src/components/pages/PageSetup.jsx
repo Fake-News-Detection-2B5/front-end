@@ -5,6 +5,7 @@ import { Button, Tabs, Tab, Form, Pagination } from "react-bootstrap";
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import { LinkContainer } from "react-router-bootstrap";
+import { Redirect } from "react-router";
 
 import "../../style/setup.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
@@ -153,8 +154,23 @@ class PageSetup extends Component {
     });
   }
 
+  shouldRedirect = () => {
+    request.get(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
+      uid: session.get().userId,
+      skip: 0,
+      count: 100
+    }).then((res) => {
+        console.log(res.data.length);
+        return res.data.length;
+      }).catch((err) => {
+        console.error(err);
+    });
+  }
+
   render() {
-    return (
+    return this.shouldRedirect() > 0 ? 
+    (<Redirect to="/feed" />) :
+    (
       <React.Fragment>
         <div className="tab-custom-container">
           <div className="setup-title">

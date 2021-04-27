@@ -21,6 +21,7 @@ routes['API_USER_GET_BY_ID'] = `${routes.API_USER}/get`;
 routes['API_PREFERENCES'] = '/preferences';
 routes['API_PREFERENCES_GET'] = `${routes.API_PREFERENCES}/isSubscribed`;
 routes['API_PREFERENCES_UPDATE'] = `${routes.API_PREFERENCES}/updateSubscriptionStatus`;
+routes['API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS'] = `${routes.API_PREFERENCES}/getByUserId`;
 
 export default {
     routes: routes,

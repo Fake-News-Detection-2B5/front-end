@@ -14,7 +14,7 @@ function PageLanding() {
   const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
-    <Redirect to="/feed" />
+    <Redirect to="/setup" />
   ) : (
     <React.Fragment>
       <grid-template>
