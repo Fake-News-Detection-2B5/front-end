@@ -4,6 +4,7 @@ import { Button, Tabs, Tab, Form, Pagination } from "react-bootstrap";
 
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
+import JustUserPicture from "../common/JustUserPicture.jsx";
 
 import "../../style/settings.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
@@ -20,7 +21,7 @@ class PageSettings extends Component {
       count: 0,
       list: []
     },
-    query: "",       // chanes when pressing search
+    query: "",       // changes when pressing search
     searchQuery: "", // changes with key presses
     pagination: {
       index: 1,
@@ -167,14 +168,7 @@ class PageSettings extends Component {
                       className="justify-content-center"
                     >
                       <div id="photo-with-button">
-                        <img
-                          id="photo-border"
-                          src={
-                            process.env.PUBLIC_URL + "/res/img/dummy_user.png"
-                          }
-                          width="100%"
-                          height="100%"
-                        />
+                        <JustUserPicture />
                         <Button id="settings-button"> Edit </Button>
                       </div>
                     </div>

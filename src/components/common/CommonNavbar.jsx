@@ -1,85 +1,81 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Logout from "../utility/Logout.jsx";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import "../../style/navbar.scss";
 
 import session from "../../util/session.js";
 
-class CommonNavbar extends Component {
-  state = {
-    sessionInterval: null,
-  };
+const CommonNavbar = (props) => {
+  var { sessionInterval } = useState(0);
+  const { isAuthenticated, user } = useAuth0();
 
-  componentDidMount() {
-    if (session.isReady()) {
-      this.setState();
-    } else {
-      this.state.sessionInterval = setInterval(() => {
+  useEffect(() => {
+    if (!session.isReady()) {
+      sessionInterval = setInterval(() => {
         if (session.isReady()) {
-          clearInterval(this.state.sessionInterval);
-          this.setState();
+          clearInterval(sessionInterval);
         }
       }, 10);
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <React.Fragment>
-        <Navbar
-          id="navbar"
-          bg="white"
-          expand="sm"
-          className="sticky-top border-bottom"
-        >
-          <LinkContainer to="/">
-            <Navbar.Brand>
-              <img
-                className="image-brand rounded-img shadow-img"
-                width="32"
-                height="32"
-                src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
-                alt="Brand"
-              />
-            </Navbar.Brand>
-          </LinkContainer>
-          {this.props.authenticated ? (
-            <Navbar.Collapse>
-              <Nav className="ml-auto">
-                <NavDropdown
-                  title={
-                    <React.Fragment>
-                      <img
-                        className="image-brand"
-                        width="32"
-                        height="32"
-                        src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"}
-                        alt="Username"
-                      />
-                      <span id="username">{session.get().username}</span>
-                    </React.Fragment>
-                  }
-                >
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/settings">
-                    <NavDropdown.Item>Settings</NavDropdown.Item>
-                  </LinkContainer>
+  return (
+    <React.Fragment>
+      <Navbar
+        id="navbar"
+        bg="white"
+        expand="sm"
+        className="sticky-top border-bottom"
+      >
+        <LinkContainer to="/">
+          <Navbar.Brand>
+            <img
+              className="image-brand rounded-img shadow-img"
+              width="32"
+              height="32"
+              src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
+              alt="Brand"
+            />
+          </Navbar.Brand>
+        </LinkContainer>
+        {props.authenticated ? (
+          <Navbar.Collapse>
+            <Nav className="ml-auto">
+              <NavDropdown
+                title={
+                  isAuthenticated ? 
+                  <React.Fragment>
+                    <img
+                      className="image-brand"
+                      width="32"
+                      height="32"
+                      src={user.picture}
+                      alt={user.name}
+                    />
+                    <span id="username">{user.name}</span>
+                  </React.Fragment>
+                  : ""
+                }
+              >
+                <LinkContainer to="/profile">
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/settings">
+                  <NavDropdown.Item>Settings</NavDropdown.Item>
+                </LinkContainer>
 
-                  <Logout />
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          ) : (
-            ""
-          )}
-        </Navbar>
-      </React.Fragment>
-    );
-  }
+                <Logout />
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        ) : (
+          ""
+        )}
+      </Navbar>
+    </React.Fragment>
+  );
 }
 
 export default CommonNavbar;

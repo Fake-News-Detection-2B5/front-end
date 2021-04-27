@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
@@ -12,47 +12,39 @@ import session from "../../util/session.js";
 
 import "../../style/profile.scss";
 
-class PageProfile extends Component {
-  state = {
-    sessionInterval: null,
-  };
+const PageProfile = () => {
+  var { sessionInterval } = useState(0);
+  const { isAuthenticated, user } = useAuth0();
 
-  componentDidMount = () => {
-    if (session.isReady()) {
-      this.setState();
-    } else {
-      this.state.sessionInterval = setInterval(() => {
+  useEffect(() => {
+    if (!session.isReady()) {
+      sessionInterval = setInterval(() => {
         if (session.isReady()) {
-          clearInterval(this.state.sessionInterval);
-          this.setState();
+          clearInterval(sessionInterval);
         }
       }, 10);
     }
-  };
+  }, []);
 
-  render() {
-    return (
-      <React.Fragment>
-        <CommonNavbar authenticated />
-        <div id="profile-container">
-          <div id="profile-header">
-            <img
-              className="photo-border"
-              src={process.env.PUBLIC_URL + "/res/img/dummy_user.png"}
-              alt="User avatar"
-            />
-            <div id="profile-username">
-              <h1>{session.get().username}</h1>
-            </div>
-          </div>
-          <div id="bio-container-profile" className="justify-content-center">
-            <div id="bio-text-container">{session.get().bio}</div>
+  return (
+    <React.Fragment>
+      <CommonNavbar authenticated />
+      {isAuthenticated ? 
+      <div id="profile-container">
+        <div id="profile-header">
+          <img src={user.picture} alt={user.name}/>
+          <div id="profile-username">
+            <h1>{user.name}</h1>
           </div>
         </div>
-        <CommonFooter fixed />
-      </React.Fragment>
-    );
-  }
+        <div id="bio-container-profile" className="justify-content-center">
+          <div id="bio-text-container">{session.get().bio}</div>
+        </div>
+      </div>
+      : "" }
+      <CommonFooter fixed />
+    </React.Fragment>
+  );
 }
 
 export default PageProfile;

@@ -256,6 +256,7 @@ class PageSetup extends Component {
           </div>
         </div>
         <CommonFooter fixed />
+        <br/><br/><br/>
       </React.Fragment>
     );
   }
