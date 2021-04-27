@@ -67,7 +67,7 @@ class PageSetup extends Component {
     request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH_COUNT : request.routes.API_PROVIDER_COUNT, {
       query: this.state.query
     }).then((res) => {
-        let providerCount = parseInt(res.data);
+        let providerCount = res.data.count;
 
         this.setState({
           provider: {
