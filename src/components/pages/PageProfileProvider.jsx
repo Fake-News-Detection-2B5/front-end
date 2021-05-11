@@ -8,6 +8,7 @@ import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import CommonPost   from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
+import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
 import '../../style/style.scss';
 
@@ -40,6 +41,7 @@ class PageProfileProvider extends Component {
   render() {
     return (
       <React.Fragment>
+        <RedirectIfNeeded></RedirectIfNeeded>
       {this.state.providerValid == false ? <Redirect to="/feed" /> : 
       <React.Fragment>
         <CommonNavbar authenticated />
