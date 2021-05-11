@@ -37,7 +37,7 @@ export default {
         return axios.put(helper.pathJoin(routes.API_URL, path), data);
     },
     put2: (path, data) => {
-        var fullPath = helper.pathJoin(routes.API_URL2, path);
+        var fullPath = helper.pathJoin(routes.API_URL, path);
         fullPath += '?';
         var first = true;
         for (const [key, value] of Object.entries(data)) {

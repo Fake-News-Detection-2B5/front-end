@@ -10,6 +10,7 @@ function Logout() {
       <NavDropdown.Item
         onClick={() => {
           logout({ returnTo: window.location.origin });
+          window.location = "/";
         }}
       >
         Logout

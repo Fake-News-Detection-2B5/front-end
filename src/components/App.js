@@ -8,6 +8,7 @@ import PageProfileProvider from "./pages/PageProfileProvider";
 import PageSettings from "./pages/PageSettings";
 import PageFAQ from "./pages/PageFAQ";
 import PageSetup from "./pages/PageSetup";
+import RedirectIfNeeded from "./utility/RedirectIfNeeded";
 
 import session from "../util/session.js";
 
@@ -30,7 +31,9 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={PageLanding} />
-
+        </Switch>
+          <RedirectIfNeeded></RedirectIfNeeded>
+        <Switch>
           <Route exact path="/feed" component={PageFeed} />
 
           <Route exact path="/profile" component={PageProfile} />
