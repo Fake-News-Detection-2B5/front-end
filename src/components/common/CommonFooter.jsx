@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button } from "react-bootstrap";
-import '../../style/footer.scss';
+import '../../style/style.scss';
 
 class CommonFooter extends Component {
     state = { showFAQ: true };

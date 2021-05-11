@@ -10,7 +10,7 @@ import { Profile } from "../utility/Profile";
 
 import session from "../../util/session.js";
 
-import "../../style/profile.scss";
+import '../../style/style.scss';
 
 const PageProfile = () => {
   var { sessionInterval } = useState(0);

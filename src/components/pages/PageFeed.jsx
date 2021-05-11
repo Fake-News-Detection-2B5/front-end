@@ -7,7 +7,7 @@ import CommonFooter from "../common/CommonFooter.jsx";
 import CommonPost from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
 
-import "../../style/feed.scss";
+import '../../style/style.scss';
 
 const POST_INITIAL_COUNT = 10;
 const POST_LOAD_COUNT = 5;

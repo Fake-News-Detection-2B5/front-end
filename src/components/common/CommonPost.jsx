@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-import '../../style/post.scss';
+import '../../style/style.scss';
 
 class CommonPost extends Component {
     state = { };

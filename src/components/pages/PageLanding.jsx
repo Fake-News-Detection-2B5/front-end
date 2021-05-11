@@ -7,7 +7,7 @@ import Auth0Btn from "../utility/Auth0Btn.jsx";
 import { Redirect } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import "../../style/landing.scss";
+import '../../style/style.scss';
 
 function PageLanding() {
   const [elem, setElem] = useState();

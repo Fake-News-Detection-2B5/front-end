@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Logout from "../utility/Logout.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import "../../style/navbar.scss";
+import '../../style/style.scss';
 
 import session from "../../util/session.js";
 

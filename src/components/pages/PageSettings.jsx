@@ -6,7 +6,7 @@ import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import JustUserPicture from "../common/JustUserPicture.jsx";
 
-import "../../style/settings.scss";
+import '../../style/style.scss';
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
 import request from "../../util/request.js";

@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import CommonFooter from  "../common/CommonFooter.jsx";
 import FAQ_Question from "../utility/FAQ_Question.jsx";
 
-import '../../style/faq.scss';
+import '../../style/style.scss';
 
 class PageFAQ extends Component {
   state = { 

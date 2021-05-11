@@ -7,7 +7,7 @@ import CommonFooter from "../common/CommonFooter.jsx";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect } from "react-router";
 
-import "../../style/setup.scss";
+import '../../style/style.scss';
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
 import request from "../../util/request.js";

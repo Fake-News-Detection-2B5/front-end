@@ -9,7 +9,7 @@ import CommonFooter from "../common/CommonFooter.jsx";
 import CommonPost   from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
 
-import '../../style/profile_provider.scss';
+import '../../style/style.scss';
 
 class PageProfileProvider extends Component {
   state = {
