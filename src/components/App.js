@@ -45,12 +45,6 @@ class App extends Component {
           <Route exact path="/setup" component={PageSetup} />
 
           <Route exact path="/:providerId" component={PageProfileProvider} />
-
-          {/*
-              Redirects
-            */}
-          {/*<Redirect from="/diary" to={"/diary/" + Session.restaurant_id} />
-          <Redirect from="/*" to={"/security/login"} />*/}
         </Switch>
       </BrowserRouter>
     );
