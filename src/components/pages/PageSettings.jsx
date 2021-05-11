@@ -9,6 +9,8 @@ import JustUserPicture from "../common/JustUserPicture.jsx";
 import "../../style/settings.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
+import RedirectIfNeeded from "../utility/RedirectIfNeeded";
+
 import request from "../../util/request.js";
 import session from "../../util/session.js";
 
@@ -240,6 +242,7 @@ let PageSettings = () => {
 
   return (
     <React.Fragment>
+      <RedirectIfNeeded></RedirectIfNeeded>
       <CommonNavbar authenticated />
       <div id="settings-container">
         <Tabs defaultActiveKey="account" className="justify-content-center">

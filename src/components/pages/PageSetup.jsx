@@ -10,6 +10,8 @@ import { Redirect } from "react-router";
 import "../../style/setup.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
+import RedirectIfNeeded from "../utility/RedirectIfNeeded";
+
 import request from "../../util/request.js";
 import session from "../../util/session.js";
 
@@ -174,6 +176,7 @@ class PageSetup extends Component {
   render() {
     return (
       <React.Fragment>
+        <RedirectIfNeeded></RedirectIfNeeded>
         {this.state.redirectComponent}
         <div className="tab-custom-container">
           <div className="setup-title">
