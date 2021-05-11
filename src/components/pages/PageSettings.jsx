@@ -58,6 +58,7 @@ class PageSettings extends Component {
             list: res.data
           }
         })
+        this.updateProviderChecked();
       }).catch((err) => {
         console.error(err);
     });
@@ -92,8 +93,7 @@ class PageSettings extends Component {
         uid: session.get().userId,
         prov_id: provider.id
       }).then((res) => {
-          let checked = parseInt(res.data);
-          
+          let checked = (res.data.toString().trim().toLowerCase() === "true");
           this.state.provider.list[index].checked = checked;
           this.setState();
           this.forceUpdate();
@@ -141,7 +141,7 @@ class PageSettings extends Component {
 
   handleSaveSettings = () => {
     this.state.provider.list.map((provider, index) => {
-      request.put(request.routes.API_PREFERENCES_UPDATE, {
+      request.put2(request.routes.API_PREFERENCES_UPDATE, {
         uid: session.get().userId,
         prov_id: provider.id,
         status: provider.checked ? true : false

@@ -2,7 +2,8 @@ import axios from 'axios';
 import helper from './helper.js';
 
 const routes = {
-    API_URL: 'https://fake-database-fe-support.herokuapp.com'
+    API_URL: 'https://fake-news-zuul-gateway.herokuapp.com/fake-database',
+    API_URL2: 'https://fake-database-fe-support.herokuapp.com'
 };
 
 routes['API_PROVIDER'] = '/provider';
@@ -34,6 +35,21 @@ export default {
     },
     put: (path, data) => {
         return axios.put(helper.pathJoin(routes.API_URL, path), data);
+    },
+    put2: (path, data) => {
+        var fullPath = helper.pathJoin(routes.API_URL2, path);
+        fullPath += '?';
+        var first = true;
+        for (const [key, value] of Object.entries(data)) {
+            if(first) {
+                first = false;
+            }
+            else {
+                fullPath += '&'
+            }
+            fullPath += key + '=' + value;
+          }
+        return axios.put(fullPath, data);
     },
     getUrl: (url, data) => {
         return axios.get(url, { params: data });

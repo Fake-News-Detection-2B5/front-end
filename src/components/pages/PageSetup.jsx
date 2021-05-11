@@ -28,7 +28,8 @@ class PageSetup extends Component {
       index: 1,
       count: 0
     },
-    sessionInterval: null
+    sessionInterval: null,
+    redirectComponent: null
   };
 
   componentDidMount = () => {
@@ -44,6 +45,8 @@ class PageSetup extends Component {
         }
       }, 10);
     }
+
+    this.shouldRedirect();
   }
 
   updateProviders = () => {
@@ -59,6 +62,7 @@ class PageSetup extends Component {
             list: res.data
           }
         })
+        this.updateProviderChecked();
       }).catch((err) => {
         console.error(err);
     });
@@ -93,7 +97,7 @@ class PageSetup extends Component {
         uid: session.get().userId,
         prov_id: provider.id
       }).then((res) => {
-          let checked = parseInt(res.data);
+          let checked = (res.data.toString().trim().toLowerCase() === "true");
           
           this.state.provider.list[index].checked = checked;
           this.setState();
@@ -142,7 +146,7 @@ class PageSetup extends Component {
 
   handleSaveSettings = () => {
     this.state.provider.list.map((provider, index) => {
-      request.put(request.routes.API_PREFERENCES_UPDATE, {
+      request.put2(request.routes.API_PREFERENCES_UPDATE, {
         uid: session.get().userId,
         prov_id: provider.id,
         status: provider.checked ? true : false
@@ -160,18 +164,17 @@ class PageSetup extends Component {
       skip: 0,
       count: 100
     }).then((res) => {
-        console.log(res.data.length);
-        return res.data.length;
+        console.log(res.data);
+        this.setState({redirectComponent: res.data.length > 0 ? <Redirect to="/feed" /> : ""});
       }).catch((err) => {
         console.error(err);
     });
   }
 
   render() {
-    return this.shouldRedirect() > 0 ? 
-    (<Redirect to="/feed" />) :
-    (
+    return (
       <React.Fragment>
+        {this.state.redirectComponent}
         <div className="tab-custom-container">
           <div className="setup-title">
             Looks like you're not subscribed to any news provider<br/>Select some, and you'll see news from them in your feed
