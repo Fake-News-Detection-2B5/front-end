@@ -57,3 +57,14 @@ img {
 .shadow-img {
   box-shadow: $shadow-small;
 }
+
+@import "./faq.scss";
+@import "./feed.scss";
+@import "./footer.scss";
+@import "./landing.scss";
+@import "./navbar.scss";
+@import "./post.scss";
+@import "./profile_provider.scss";
+@import "./profile.scss";
+@import "./settings.scss";
+@import "./setup.scss";
