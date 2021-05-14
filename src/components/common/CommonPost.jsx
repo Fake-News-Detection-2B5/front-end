@@ -29,20 +29,20 @@ class CommonPost extends Component {
                                 (feedback)
                             </a>
                         </LinkContainer>
-                        <span className={`post-credibility-${parseInt(this.props.fake) < 50 ? 'good' : 'bad'}`}>
-                            {this.props.fake}% fake
+                        <span className={`post-credibility-${this.props.fake === "true" ? 'good' : 'bad'}`}>
+                            {this.props.fake}
                         </span>
                     </div>
                 </div>
                 <div className="post-body">
                     <a href={this.props.url} target="_blank">
-                        <img className="post-thumbnail" src={this.props.thumbnail} alt="Thumbnail" />
+                        <img className="post-thumbnail" src={this.props.title} alt="Thumbnail" />
                     </a>
                     <a className="post-title" href={this.props.url} target="_blank">
-                        {this.props.title}
+                        {this.props.thumbnail}
                     </a>
                     <div className="post-description text-secondary">
-                        {this.props.description}
+                        {this.props.description.toString().substring(0, 300) + "..."}
                     </div>
                 </div>
             </div>
