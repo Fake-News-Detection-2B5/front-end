@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
 
 import CommonFooter from "../common/CommonFooter.jsx";
@@ -8,17 +8,36 @@ import { Redirect } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import '../../style/style.scss';
+import { render } from "@testing-library/react";
 
-function PageLanding() {
-  const [elem, setElem] = useState();
-  const { isAuthenticated } = useAuth0();
+import LoginForm from "../utility/LoginForm.jsx";
+import RegisterForm from "../utility/RegisterForm.jsx";
 
-  return isAuthenticated ? (
+class PageLanding extends Component {
+  state = {
+    item: [<LoginForm />],
+    isLogin: true
+  };
+
+  handleShowLogin = () => {
+    const newItem = [<LoginForm />];
+    this.setState({ item: newItem, isLogin: true });
+    console.log("Updating!");
+  }
+
+  handleShowRegister = () => {
+    const newItem = [<RegisterForm />];
+    this.setState({ item: newItem, isLogin: false });
+    console.log("Updating!");
+  };
+
+  render() {
+  return false ? (
     <Redirect to="/setup" />
   ) : (
     <React.Fragment>
       <grid-template>
-        <grid-image onMouseOver={() => setElem(<div></div>)}>
+        <grid-image>
           <img
             src={"../../../res/img/landingpage.svg"}
             alt="React Logo"
@@ -26,36 +45,42 @@ function PageLanding() {
             height="100%"
           />
         </grid-image>
-        {elem}
-        <btn-login onMouseOver={() => setElem(<Animation />)}>
-          <Auth0Btn />
-        </btn-login>
-        <div id="top-remove" onMouseOver={() => setElem(<div></div>)}>
-          <div id="info">
-            {/* 
-            <img
-              id="website-logo"
-              className="rounded-img"
-              src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
-              alt="brand logo"
-            />
-           */}
-            <h1 id="title-fnd">
-              <b>Fake News Detection</b>
-            </h1>
-          </div>
-          <div id="info-bottom">
-            <h2>Welcome!</h2>
-            <h3>Please login or register to continue...</h3>
-          </div>
-        </div>
-        <div id="left-remove" onMouseOver={() => setElem(<div></div>)}></div>
-        <div id="bottom-remove" onMouseOver={() => setElem(<div></div>)}></div>
-        <div id="right-remove" onMouseOver={() => setElem(<div></div>)}></div>
+        <panel>
+            <panelGrid>
+              <btn-login>
+                <Button
+                  id="button-radius-left"
+                  onClick={this.handleShowLogin}
+                  type="button"
+                  variant={this.state.isLogin ? "success" : "secondary"}
+                  size="lg"
+                  block
+                >
+                  Login
+                </Button>
+              </btn-login>
+              <btn-register>
+                <Button
+                  id="button-radius-right"
+                  onClick={this.handleShowRegister}
+                  type="button"
+                  variant={this.state.isLogin ? "secondary" : "success"}
+                  size="lg"
+                  block
+                >
+                  Register
+                </Button>
+              </btn-register>
+              <panel-content-wrapper>
+                {this.state.item[0]}
+              </panel-content-wrapper>
+            </panelGrid>
+          </panel>
       </grid-template>
       <CommonFooter fixed />
     </React.Fragment>
   );
+  }
 }
 
 export default PageLanding;
