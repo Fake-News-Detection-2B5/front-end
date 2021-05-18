@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Logout from "../utility/Logout.jsx";
+import SearchBar from "../utility/SearchBar.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import '../../style/style.scss';
 
@@ -42,10 +43,9 @@ const CommonNavbar = (props) => {
         </LinkContainer>
         {props.authenticated ? (
           props.withSearch ? (
-            <div id="navbar-container">
-              <div id="navbar-search-container">
-                <p> AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA </p>
-              </div>
+            <React.Fragment>
+              
+              <SearchBar />
             
               <Navbar.Collapse>
                 <Nav className="ml-auto">
@@ -76,7 +76,7 @@ const CommonNavbar = (props) => {
                   </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
-            </div>
+              </React.Fragment>
           ) : (
             <Navbar.Collapse>
               <Nav className="ml-auto">

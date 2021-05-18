@@ -176,7 +176,9 @@ class PageSetup extends Component {
   render() {
     return (
       <React.Fragment>
+        {/*
         <RedirectIfNeeded></RedirectIfNeeded>
+        */}
         {this.state.redirectComponent}
         <div className="tab-custom-container">
           <div className="setup-title">
