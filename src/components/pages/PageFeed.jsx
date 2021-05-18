@@ -71,8 +71,10 @@ class PageFeed extends Component {
   render() {
     return (
       <React.Fragment>
+        {/*
         <RedirectIfNeeded></RedirectIfNeeded>
-        <CommonNavbar authenticated />
+        */}
+        <CommonNavbar authenticated withSearch />
         <main id="main-feed">
           {this.state.posts.map((post) => {
             return <CommonPost {...post} key={`post-${post.id}`} />;

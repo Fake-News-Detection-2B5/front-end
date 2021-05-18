@@ -41,35 +41,73 @@ const CommonNavbar = (props) => {
           </Navbar.Brand>
         </LinkContainer>
         {props.authenticated ? (
-          <Navbar.Collapse>
-            <Nav className="ml-auto">
-              <NavDropdown
-                title={
-                  isAuthenticated ? 
-                  <React.Fragment>
-                    <img
-                      className="image-brand"
-                      width="32"
-                      height="32"
-                      src={user.picture}
-                      alt={user.name}
-                    />
-                    <span id="username">{user.name}</span>
-                  </React.Fragment>
-                  : ""
-                }
-              >
-                <LinkContainer to="/profile">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/settings">
-                  <NavDropdown.Item>Settings</NavDropdown.Item>
-                </LinkContainer>
+          props.withSearch ? (
+            <div id="navbar-container">
+              <div id="navbar-search-container">
+                <p> AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA </p>
+              </div>
+            
+              <Navbar.Collapse>
+                <Nav className="ml-auto">
+                  <NavDropdown
+                    title={
+                      isAuthenticated ?
+                        <React.Fragment>
+                          <img
+                            className="image-brand"
+                            width="32"
+                            height="32"
+                            src={user.picture}
+                            alt={user.name}
+                          />
+                          <span id="username">{user.name}</span>
+                        </React.Fragment>
+                        : ""
+                    }
+                  >
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/settings">
+                      <NavDropdown.Item>Settings</NavDropdown.Item>
+                    </LinkContainer>
 
-                <Logout />
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
+                    <Logout />
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </div>
+          ) : (
+            <Navbar.Collapse>
+              <Nav className="ml-auto">
+                <NavDropdown
+                  title={
+                    isAuthenticated ?
+                      <React.Fragment>
+                        <img
+                          className="image-brand"
+                          width="32"
+                          height="32"
+                          src={user.picture}
+                          alt={user.name}
+                        />
+                        <span id="username">{user.name}</span>
+                      </React.Fragment>
+                      : ""
+                  }
+                >
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/settings">
+                    <NavDropdown.Item>Settings</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <Logout />
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          )
         ) : (
           ""
         )}
