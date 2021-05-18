@@ -36,7 +36,7 @@ class CommonPost extends Component {
                 </div>
                 <div className="post-body">
                     <a href={this.props.url} target="_blank">
-                        <img className="post-thumbnail" src={this.props.title} alt="Thumbnail" />
+                        <img className="post-thumbnail" src={this.props.title !== "Unknown" ? this.props.title : (process.env.PUBLIC_URL + "/res/img/default_thumbnail.png")} alt="Thumbnail" />
                     </a>
                     <a className="post-title" href={this.props.url} target="_blank">
                         {this.props.thumbnail}
