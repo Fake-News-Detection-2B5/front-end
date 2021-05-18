@@ -53,7 +53,7 @@ let PageSettings = () => {
 
   let updateProviders = () => {
     request
-      .get(
+      .get2(
         searchQuery.length > 0
           ? request.routes.API_PROVIDER_SEARCH
           : request.routes.API_PROVIDER_GET_INTERVAL,
@@ -65,7 +65,8 @@ let PageSettings = () => {
               PAGINATION_PROVIDERS_PER_PAGE * (pagination.index - 1)
           ),
           query: query,
-        }
+        },
+        session.authHeaders()
       )
       .then((res) => {
         setProvider({
@@ -80,19 +81,21 @@ let PageSettings = () => {
       })
 
       .catch((err) => {
+        session.onUpdate();
         console.error(err);
       });
   };
 
   let updateProviderCount = () => {
     request
-      .get(
+      .get2(
         searchQuery.length > 0
           ? request.routes.API_PROVIDER_SEARCH_COUNT
           : request.routes.API_PROVIDER_COUNT,
         {
           query: query,
-        }
+        },
+        session.authHeaders()
       )
       .then((res) => {
         let providerCount = res.data.count;
@@ -118,6 +121,7 @@ let PageSettings = () => {
         updateProviders();
       })
       .catch((err) => {
+        session.onUpdate();
         console.error(err);
       });
   };
@@ -125,10 +129,10 @@ let PageSettings = () => {
   let updateProviderChecked = () => {
     provider.list.map((providerElem, index) => {
       request
-        .get(request.routes.API_PREFERENCES_GET, {
+        .get2(request.routes.API_PREFERENCES_GET, {
           uid: session.get().userId,
           prov_id: providerElem.id,
-        })
+        }, session.authHeaders())
         .then((res) => {
           let checked = res.data.toString().trim().toLowerCase() === "true";
 
@@ -136,6 +140,7 @@ let PageSettings = () => {
           forceUpdate();
         })
         .catch((err) => {
+          session.onUpdate();
           console.error(err);
         });
     });
@@ -181,11 +186,12 @@ let PageSettings = () => {
           uid: session.get().userId,
           prov_id: provider.id,
           status: provider.checked ? true : false,
-        })
+        }, session.authHeaders())
         .then((res) => {
           console.log(res);
         })
         .catch((err) => {
+          session.onUpdate();
           console.error(err);
         });
     });
@@ -204,29 +210,19 @@ let PageSettings = () => {
   };
 
   let handleImageChange = async () => {
-    const domain = "gmatei.eu.auth0.com";
-
-    const accessToken = await getAccessTokenSilently({
-      audience: `https://gmatei.eu.auth0.com/api/v2/`,
-      scope:
-        "read:client_grants,create:client_grants,delete:client_grants,update:client_grants,read:users,update:users,delete:user,create:users,read:users_app_metadata,update:users_app_metadata,delete:users_app_metadata,create:users_app_metadata,read:user_custom_blocks,create:user_custom_blocks,delete:user_custom_blocks,create:user_tickets,read:clients,update:clients,delete:clients,create:clients,read:client_keys,update:client_keys ,delete:client_keys,create:client_keys,read:connections,update:connections,delete:connections,create:connections,read:resource_servers,update:resource_servers,delete:resource_servers,create:resource_servers,read:device_credentials,update:device_credentials,delete:device_credentials,create:device_credentials,read:rules,update:rules,delete:rules,create:rules,read:rules_configs,update:rules_configs,delete:rules_configs,read:hooks,update:hookS,delete:hooks,create:hooks,read:actions,update:actions	,delete:actions,create:actions,read:email_provider,update:email_provider,delete:email_provider,create:email_provider,blacklist:tokens,read:stats,read:insights,read:tenant_settings,update:tenant_settings,read:logs,read:logs_users,read:shields,create:shields,update:shields,delete:shields,read:anomaly_blocks,delete:anomaly_blocks	 ,update:triggers,read:triggers,read:grants,delete:grants,read:guardian_factors,update:guardian_factors,read:guardian_enrollments,delete:guardian_enrollments,create:guardian_enrollment_tickets,read:user_idp_tokens,create:passwords_checking_job,delete:passwords_checking_job,read:custom_domains,delete:custom_domains,create:custom_domains,update:custom_domains,read:email_templates,create:email_templates,update:email_templates,read:mfa_policies,update:mfa_policies,read:roles,create:roles	 ,delete:roles,update:roles,read:prompts,update:prompts,read:branding,update:branding,delete:branding,read:log_streams,create:log_streams,delete:log_streams,update:log_streams,create:signing_keys,read:signing_keys,update:signing_keys,read:limits,update:limits,create:role_members,read:role_members,delete:role_members,read:entitlements,read:attack_protection,update:attack_protection,read:organizations,update:organizations,create:organizations,delete:organizations,create:organization_members,read:organization_members,delete:organization_members,create:organization_connections,read:organization_connections,update:organization_connections,delete:organization_connections,create:organization_member_roles,read:organization_member_roles,delete:organization_member_roles,create:organization_invitations,read:organization_invitations,delete:organization_invitations",
-    });
-    const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-
-    const metadataResponse = await fetch(userDetailsByIdUrl, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const { user_metadata } = await metadataResponse.json();
-    user.user_metadata = user_metadata;
-    console.log(user_metadata);
-    user.user_metadata = { image: imageUrl };
-    if (user.user_metadata.picture) {
-      user.picture = imageUrl;
-      console.log("MERGE BOSS!");
-    }
+    request
+      .put2(request.routes.API_USER_UPDATE, {
+        id: session.get().userId,
+        avatar: imageUrl,
+      }, session.authHeaders())
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        session.onUpdate();
+        console.error(err);
+      });
   };
 
   let handleUrlKeyPress = (event) => {

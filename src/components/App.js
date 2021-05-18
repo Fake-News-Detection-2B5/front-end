@@ -9,16 +9,29 @@ import PageSettings from "./pages/PageSettings";
 import PageFAQ from "./pages/PageFAQ";
 import PageSetup from "./pages/PageSetup";
 
+import Auth from "./utility/Auth";
+
 import session from "../util/session.js";
 
 class App extends Component {
   state = { /*dummy: false*/ };
   constructor() {
     super();
-    session.init();
+    //await session.load();
     /*Session.getFromCookies();
     Session.onUpdate = this.handleSessionUpdate;*/
+    session.onUpdate = () => {
+      try {
+        this.forceUpdate();
+      } catch(ex) {
+        
+      }
+    }
+  }
 
+  async componentDidMount() {
+    await session.load();
+    this.forceUpdate();
   }
 
   /*handleSessionUpdate = () => {
@@ -31,17 +44,25 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={PageLanding} />
 
-          <Route exact path="/feed" component={PageFeed} />
+          <Auth>
+            <React.Fragment>
+              <Switch>
+                <Route exact path="/feed" component={PageFeed} />
 
-          <Route exact path="/profile" component={PageProfile} />
+                <Route exact path="/profile" component={PageProfile} />
 
-          <Route exact path="/settings" component={PageSettings} />
+                <Route exact path="/settings" component={PageSettings} />
 
-          <Route exact path="/faq" component={PageFAQ} />
+                <Route exact path="/faq" component={PageFAQ} />
 
-          <Route exact path="/setup" component={PageSetup} />
+                <Route exact path="/setup" component={PageSetup} />
 
-          <Route exact path="/:providerId" component={PageProfileProvider} />
+                <Route exact path="/:providerId" component={PageProfileProvider} />
+              </Switch>
+            </React.Fragment>
+          </Auth>
+
+          
         </Switch>
       </BrowserRouter>
     );

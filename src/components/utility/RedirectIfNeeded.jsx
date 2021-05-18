@@ -3,11 +3,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Redirect } from "react-router";
 import { wait } from "@testing-library/dom";
 
+import session from "../../util/session"
+
 function RedirectIfNeeded() {
-  const { isAuthenticated } = useAuth0();
+  if(!session.isLoaded() || session.isReady())
+      return "";
 
   return (
-    isAuthenticated ? "" : <Redirect to="/" />
+    <Redirect to="/" />
   );
 }
 

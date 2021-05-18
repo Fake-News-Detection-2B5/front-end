@@ -8,6 +8,8 @@ import CommonPost from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
+import session from "../../util/session";
+
 import '../../style/style.scss';
 
 const POST_INITIAL_COUNT = 10;
@@ -36,10 +38,10 @@ class PageFeed extends Component {
 
   loadPosts = (count) => {
     request
-      .get(request.routes.API_POST_GET_INTERVAL, {
+      .get2(request.routes.API_POST_GET_INTERVAL, {
         skip: this.state.postIndex,
         count: count,
-      })
+      }, session.authHeaders())
       .then((res) => {
         this.setState({
           posts: this.state.posts.concat(
@@ -64,6 +66,7 @@ class PageFeed extends Component {
         });
       })
       .catch((err) => {
+        session.onUpdate();
         console.error(err);
       });
   };
@@ -71,9 +74,7 @@ class PageFeed extends Component {
   render() {
     return (
       <React.Fragment>
-        {/*
         <RedirectIfNeeded></RedirectIfNeeded>
-        */}
         <CommonNavbar authenticated withSearch />
         <main id="main-feed">
           {this.state.posts.map((post) => {

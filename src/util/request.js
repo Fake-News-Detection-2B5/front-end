@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from "qs";
 import helper from './helper.js';
 
 const routes = {
@@ -18,7 +19,10 @@ routes['API_POST'] = '/post';
 routes['API_POST_GET_INTERVAL'] = `${routes.API_POST}/getInterval`;
 
 routes['API_USER'] = '/user';
+routes['API_USER_LOGIN'] = `${routes.API_USER}/login`
+routes['API_USER_REGISTER'] = `${routes.API_USER}/register`;
 routes['API_USER_GET_BY_ID'] = `${routes.API_USER}/get`;
+routes['API_USER_UPDATE'] = `${routes.API_USER}/update`;
 
 routes['API_PREFERENCES'] = '/preferences';
 routes['API_PREFERENCES_GET'] = `${routes.API_PREFERENCES}/isSubscribed`;
@@ -36,20 +40,43 @@ export default {
     put: (path, data) => {
         return axios.put(helper.pathJoin(routes.API_URL, path), data);
     },
-    put2: (path, data) => {
-        var fullPath = helper.pathJoin(routes.API_URL, path);
-        fullPath += '?';
-        var first = true;
-        for (const [key, value] of Object.entries(data)) {
-            if(first) {
-                first = false;
+    delete: (path, data) => {
+        return axios.delete(helper.pathJoin(routes.API_URL, path), data);
+    },
+    get2: (path, data, headers) => {
+        return axios({
+            method: "get",
+            url: helper.pathJoin(routes.API_URL2, path),
+            params: data,
+            headers: headers ?? {}
+        });
+    },
+    post2: (path, data, headers) => {
+        return axios({
+            method: "post",
+            url: helper.pathJoin(routes.API_URL2, path),
+            data: qs.stringify(data),
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                ...headers
             }
-            else {
-                fullPath += '&'
+        })
+        return axios.post(helper.pathJoin(routes.API_URL2, path), data);
+    },
+    delete2: (path, data, headers) => {
+        return axios.delete(helper.pathJoin(routes.API_URL2, path), data, headers);
+    },
+    put2: (path, data, headers) => {
+        return axios({
+            method: "put",
+            url: helper.pathJoin(routes.API_URL2, path),
+            data: qs.stringify(data),
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                ...headers
             }
-            fullPath += key + '=' + value;
-          }
-        return axios.put(fullPath, data);
+        })
+        //return axios.put(fullPath, data);
     },
     getUrl: (url, data) => {
         return axios.get(url, { params: data });

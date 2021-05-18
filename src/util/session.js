@@ -1,36 +1,131 @@
 import request from "./request.js"
 
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 var session = {
     ready: false,
+    loaded: false,
 
     data: {
-        userId: 43, // Retrieve this from the server.
-
+        userId: null,
+        token: null,
         username: null,
         avatar: null,
         bio: null,
         email: null
-    }
+    },
+
+    onUpdate: null,
+
+    headers: () => ({
+        "X-Auth-User": session.data.userId,
+        "X-Auth-Token": session.data.token
+    })
 };
 
-export default {
-    init: () => {
-      if(!session.ready) {
-        request.get(request.routes.API_USER_GET_BY_ID, {
-            id: session.data.userId
-        }).then((res) => {
-                session.data.username = res.data.username;
-                session.data.avatar = res.data.avatarUrl;
-                session.data.bio = res.data.bio;
-                session.data.email = res.data.email;
+async function initSession() {
+    if(!session.ready) {
+        try {
+            let res = await request.get2(request.routes.API_USER_GET_BY_ID, {
+                id: session.data.userId
+            }, session.headers());
 
-                session.ready = true;
-            }).catch((err) => {
-                console.error(err);
-                session.ready = true;
-        });
-      }
+            session.data.username = res.data.username;
+            session.data.avatar = res.data.avatarUrl;
+            session.data.bio = res.data.bio;
+            session.data.email = res.data.email;
+
+            session.ready = true;
+        } catch(err) {
+            console.error(err);
+            session.ready = false;
+        }
+    }
+}
+
+export default {
+    load: async () => {
+        session.data.userId = cookies.get("user_id", { path: "/" });
+        session.data.token = cookies.get("token", { path: "/" });
+
+        try {
+            session.data.userId = cookies.get("user_id", { path: "/" });
+            session.data.token = cookies.get("token", { path: "/" });
+
+            if(session.data.userId && session.data.token)
+                await initSession();
+
+            session.loaded = true;
+        } catch(ex) {
+            session.loaded = true;
+        }
     },
+    login: async (user, pass) => {
+        try {
+            console.log({
+                username: user,
+                password: pass
+            });
+            let res = await request.post2(request.routes.API_USER_LOGIN, {
+                username: user,
+                password: pass
+            });
+            
+            session.data.userId = res.data.user_id;
+            session.data.token = res.data.token;
+
+            cookies.set("user_id", session.data.userId, { path: "/" });
+            cookies.set("token", session.data.token, { path: "/" });
+
+            await initSession();
+
+            return Promise.resolve(true);
+        } catch(err) {
+            console.error(err);
+
+            return Promise.resolve(false);
+        };
+    },
+    logout: async () => {
+        try {
+            let res = await request.post2(request.routes.API_USER_LOGOUT, { }, session.headers());
+
+            cookies.remove("user_id", { path: "/" });
+            cookies.remove("token", { path: "/" });
+
+            session.ready = false;
+        } catch(err) {
+            console.error(err);
+        };
+    },
+    register: async (user, email, pass) => {
+        try {
+            let res = await request.post2(request.routes.API_USER_REGISTER, {
+                username: user,
+                email: email,
+                password: pass
+            });
+            
+            session.data.userId = res.data.user_id;
+            session.data.token = res.data.token;
+
+            cookies.set("user_id", session.data.userId, { path: "/" });
+            cookies.set("token", session.data.token, { path: "/" });
+
+            initSession();
+
+            Promise.resolve(true);
+        } catch(err) {
+            console.error(err);
+            Promise.resolve(false);
+        };
+    },
+    authHeaders: () => session.headers(),
     isReady: () => session.ready,
+    isLoaded: () => session.loaded,
+    onUpdate: () => session.onUpdate(),
+    setUpdate: (handler) => session.onUpdate = handler,
     get: () => session.data
 }

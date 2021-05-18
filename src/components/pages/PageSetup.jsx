@@ -52,11 +52,11 @@ class PageSetup extends Component {
   }
 
   updateProviders = () => {
-    request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH : request.routes.API_PROVIDER_GET_INTERVAL, {
+    request.get2(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH : request.routes.API_PROVIDER_GET_INTERVAL, {
       skip: PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1),
       count: Math.min(PAGINATION_PROVIDERS_PER_PAGE, this.state.provider.count - PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1)),
       query: this.state.query
-    }).then((res) => {
+    }, session.authHeaders()).then((res) => {
       console.log(res.data);
         this.setState({
           provider: {
@@ -66,14 +66,15 @@ class PageSetup extends Component {
         })
         this.updateProviderChecked();
       }).catch((err) => {
+        session.onUpdate();
         console.error(err);
     });
   }
 
   updateProviderCount = () => {
-    request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH_COUNT : request.routes.API_PROVIDER_COUNT, {
+    request.get2(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH_COUNT : request.routes.API_PROVIDER_COUNT, {
       query: this.state.query
-    }).then((res) => {
+    }, session.authHeaders()).then((res) => {
         let providerCount = res.data.count;
 
         this.setState({
@@ -89,22 +90,24 @@ class PageSetup extends Component {
 
         this.updateProviders();
       }).catch((err) => {
+        session.onUpdate();
         console.error(err);
     });
   }
 
   updateProviderChecked = () => {
     this.state.provider.list.map((provider, index) => {
-      request.get(request.routes.API_PREFERENCES_GET, {
+      request.get2(request.routes.API_PREFERENCES_GET, {
         uid: session.get().userId,
         prov_id: provider.id
-      }).then((res) => {
+      }, session.authHeaders()).then((res) => {
           let checked = (res.data.toString().trim().toLowerCase() === "true");
           
           this.state.provider.list[index].checked = checked;
           this.setState();
           this.forceUpdate();
         }).catch((err) => {
+          session.onUpdate();
           console.error(err);
       });
     });
@@ -152,23 +155,25 @@ class PageSetup extends Component {
         uid: session.get().userId,
         prov_id: provider.id,
         status: provider.checked ? true : false
-      }).then((res) => {
+      }, session.authHeaders()).then((res) => {
           console.log(res);
         }).catch((err) => {
+          session.onUpdate();
           console.error(err);
       });
     });
   }
 
   shouldRedirect = () => {
-    request.get(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
+    request.get2(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
       uid: session.get().userId,
       skip: 0,
       count: 100
-    }).then((res) => {
+    }, session.authHeaders()).then((res) => {
         console.log(res.data);
         this.setState({redirectComponent: res.data.length > 0 ? <Redirect to="/feed" /> : ""});
       }).catch((err) => {
+        session.onUpdate();
         console.error(err);
     });
   }
@@ -176,9 +181,7 @@ class PageSetup extends Component {
   render() {
     return (
       <React.Fragment>
-        {/*
         <RedirectIfNeeded></RedirectIfNeeded>
-        */}
         {this.state.redirectComponent}
         <div className="tab-custom-container">
           <div className="setup-title">
