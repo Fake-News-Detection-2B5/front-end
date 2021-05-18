@@ -94,7 +94,7 @@ class SearchBar extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>
+                <div id="navbar-parent">
                     <Form id="navbar-search">
                         <Form.Control type="text" placeholder="Search..." onChange={this.handleSearchChange} onKeyPress={this.handleSearchKeyPress} />
                         <Button id="preferences-setup-search-button" variant="primary" onClick={this.handleSearch}>

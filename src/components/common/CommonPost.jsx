@@ -24,11 +24,11 @@ class CommonPost extends Component {
                         </div>
                     </LinkContainer>
                     <div>
-                        <LinkContainer to="#">
+                        {/* <LinkContainer to="#">
                             <a className="post-feedback-text text-secondary">
                                 (feedback)
                             </a>
-                        </LinkContainer>
+                        </LinkContainer> */}
                         <span className={`post-credibility-${this.props.fake === "true" ? 'good' : 'bad'}`}>
                             {this.props.fake}
                         </span>

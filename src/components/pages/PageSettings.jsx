@@ -36,6 +36,7 @@ let PageSettings = () => {
   let [imageUrl, setImageUrl] = useState("");
   let [passwordUser, setPasswordUser] = useState("");
 
+  let [Bio, setBio] = useState("");  
   let [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -51,6 +52,32 @@ let PageSettings = () => {
       }
     }
   });
+
+  let handleBioKeyChange = (event) => {
+    setBio(event.target.value);
+  };
+
+
+  let handleBioChange = async () => {
+    console.log(passwordUser);
+    request
+      .put2(
+        request.routes.API_USER_UPDATE,
+        {
+          id: session.get().userId,
+          bio: Bio,
+        },
+        session.authHeaders()
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        session.onUpdate();
+        console.error(err);
+      });
+  };
 
   let updateProviders = () => {
     request
@@ -338,10 +365,17 @@ let PageSettings = () => {
                 </div>
 
                 <div id="bio-container" className="justify-content-center">
-                  <Button className="settings-button" id="bio-button">
+                  <Button id="btnBio" onClick={handleBioChange}>
                     Change Bio
                   </Button>
-                  <div id="bio-text-container">{session.get().bio}</div>
+                  <Form.Control
+                    as="textarea"
+                    rows={4}
+                    className="noSizable"
+                    onChange={handleBioKeyChange}
+                  >
+                    {session.get().bio}
+                  </Form.Control>
                 </div>
               </div>
             </div>
