@@ -20,7 +20,7 @@ class PageProfile extends Component {
         <CommonNavbar authenticated />
         <div id="profile-container">
           <div id="profile-header">
-            <img src={session.get().avatar} alt={session.get().username}/>
+            <img src={session.get().avatar} alt={session.get().username} id="profile-avatar-center"/>
             <div id="profile-username">
               <h1>{session.get().username}</h1>
             </div>

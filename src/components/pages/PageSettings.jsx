@@ -6,7 +6,7 @@ import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import JustUserPicture from "../common/JustUserPicture.jsx";
 
-import '../../style/style.scss';
+import "../../style/style.scss";
 import ProviderPreference from "../utility/ProviderPreference.jsx";
 
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
@@ -34,6 +34,7 @@ let PageSettings = () => {
 
   //TEMPORAL
   let [imageUrl, setImageUrl] = useState("");
+  let [passwordUser, setPasswordUser] = useState("");
 
   let [initialized, setInitialized] = useState(false);
 
@@ -129,10 +130,14 @@ let PageSettings = () => {
   let updateProviderChecked = () => {
     provider.list.map((providerElem, index) => {
       request
-        .get2(request.routes.API_PREFERENCES_GET, {
-          uid: session.get().userId,
-          prov_id: providerElem.id,
-        }, session.authHeaders())
+        .get2(
+          request.routes.API_PREFERENCES_GET,
+          {
+            uid: session.get().userId,
+            prov_id: providerElem.id,
+          },
+          session.authHeaders()
+        )
         .then((res) => {
           let checked = res.data.toString().trim().toLowerCase() === "true";
 
@@ -182,11 +187,15 @@ let PageSettings = () => {
   let handleSaveSettings = () => {
     provider.list.map((provider, index) => {
       request
-        .put2(request.routes.API_PREFERENCES_UPDATE, {
-          uid: session.get().userId,
-          prov_id: provider.id,
-          status: provider.checked ? true : false,
-        }, session.authHeaders())
+        .put2(
+          request.routes.API_PREFERENCES_UPDATE,
+          {
+            uid: session.get().userId,
+            prov_id: provider.id,
+            status: provider.checked ? true : false,
+          },
+          session.authHeaders()
+        )
         .then((res) => {
           console.log(res);
         })
@@ -205,16 +214,37 @@ let PageSettings = () => {
     setShowModal(false);
   };
 
-  let inputProfile = () => {
-    console.log("MERGE");
-  };
-
   let handleImageChange = async () => {
     request
-      .put2(request.routes.API_USER_UPDATE, {
-        id: session.get().userId,
-        avatar: imageUrl,
-      }, session.authHeaders())
+      .put2(
+        request.routes.API_USER_UPDATE,
+        {
+          id: session.get().userId,
+          avatar: imageUrl,
+        },
+        session.authHeaders()
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        session.onUpdate();
+        console.error(err);
+      });
+  };
+
+  let handlePasswordChange = async () => {
+    console.log(passwordUser);
+    request
+      .put2(
+        request.routes.API_USER_UPDATE,
+        {
+          id: session.get().userId,
+          password: passwordUser,
+        },
+        session.authHeaders()
+      )
       .then((res) => {
         console.log(res);
         window.location.reload();
@@ -234,6 +264,11 @@ let PageSettings = () => {
 
   let handleUrlChange = (event) => {
     setImageUrl(event.target.value);
+  };
+
+  let handlePassKeyChange = (event) => {
+    console.log(passwordUser);
+    setPasswordUser(event.target.value);
   };
 
   return (
@@ -288,9 +323,18 @@ let PageSettings = () => {
 
                 <div id="password-container" className="justify-content-center">
                   <Form.Group controlId="formchangePassword" id="formmargin">
-                    <Form.Control type="password" placeholder="New Password" />
+                    <Form.Control
+                      type="password"
+                      placeholder="New Password"
+                      onChange={handlePassKeyChange}
+                    />
                   </Form.Group>
-                  <Button className="settings-button">Change password</Button>
+                  <Button
+                    className="settings-button"
+                    onClick={handlePasswordChange}
+                  >
+                    Change password
+                  </Button>
                 </div>
 
                 <div id="bio-container" className="justify-content-center">
