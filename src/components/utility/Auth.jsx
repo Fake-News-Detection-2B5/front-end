@@ -7,6 +7,9 @@ class Auth extends Component {
   state = {};
 
   render() {
+    if(!session.isLoaded()) {
+      return "";
+    }
     return session.isReady() ? this.props.children : <Redirect to="/" />;
   }
 }

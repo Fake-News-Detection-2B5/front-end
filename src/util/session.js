@@ -90,36 +90,39 @@ export default {
     },
     logout: async () => {
         try {
-            let res = await request.post2(request.routes.API_USER_LOGOUT, { }, session.headers());
+            let res = await request.delete2(request.routes.API_USER_LOGOUT, { }, session.headers());
 
             cookies.remove("user_id", { path: "/" });
             cookies.remove("token", { path: "/" });
 
             session.ready = false;
+
+            return Promise.resolve(true);
         } catch(err) {
             console.error(err);
+            return Promise.resolve(false);
         };
     },
-    register: async (user, email, pass) => {
+    register: async (username, email, pass) => {
         try {
-            let res = await request.post2(request.routes.API_USER_REGISTER, {
-                username: user,
-                email: email,
-                password: pass
+            let res = await request.post2json(request.routes.API_USER_REGISTER, {
+                username: username,
+                passwordHash: pass,
+                avatarUrl: "https://www.kindpng.com/picc/m/21-214439_free-high-quality-person-icon-default-profile-picture.png",
+                bio: "I am " + username + " and this is my bio. Change me!",
+                email: email
             });
             
-            session.data.userId = res.data.user_id;
-            session.data.token = res.data.token;
+            // session.data.userId = res.data.user_id;
+            // session.data.token = res.data.token;
 
-            cookies.set("user_id", session.data.userId, { path: "/" });
-            cookies.set("token", session.data.token, { path: "/" });
+            // cookies.set("user_id", session.data.userId, { path: "/" });
+            // cookies.set("token", session.data.token, { path: "/" });
 
-            initSession();
-
-            Promise.resolve(true);
+            return Promise.resolve(true);
         } catch(err) {
             console.error(err);
-            Promise.resolve(false);
+            return Promise.resolve(false);
         };
     },
     authHeaders: () => session.headers(),

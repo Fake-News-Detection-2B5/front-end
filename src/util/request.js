@@ -20,6 +20,7 @@ routes['API_POST_GET_INTERVAL'] = `${routes.API_POST}/getInterval`;
 
 routes['API_USER'] = '/user';
 routes['API_USER_LOGIN'] = `${routes.API_USER}/login`
+routes['API_USER_LOGOUT'] = `${routes.API_USER}/logout`
 routes['API_USER_REGISTER'] = `${routes.API_USER}/register`;
 routes['API_USER_GET_BY_ID'] = `${routes.API_USER}/get`;
 routes['API_USER_UPDATE'] = `${routes.API_USER}/update`;
@@ -61,10 +62,28 @@ export default {
                 ...headers
             }
         })
-        return axios.post(helper.pathJoin(routes.API_URL2, path), data);
+    },
+    post2json: (path, data, headers) => {
+        return axios({
+            method: "post",
+            url: helper.pathJoin(routes.API_URL2, path),
+            data: data,
+            headers: {
+                'content-type': 'application/json',
+                ...headers
+            }
+        })
     },
     delete2: (path, data, headers) => {
-        return axios.delete(helper.pathJoin(routes.API_URL2, path), data, headers);
+        return axios({
+            method: "delete",
+            url: helper.pathJoin(routes.API_URL2, path),
+            data: data,
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                ...headers
+            }
+        })
     },
     put2: (path, data, headers) => {
         return axios({

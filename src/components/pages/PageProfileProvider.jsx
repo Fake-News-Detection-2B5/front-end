@@ -10,6 +10,8 @@ import CommonPost   from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
+import session from "../../util/session";
+
 import '../../style/style.scss';
 
 class PageProfileProvider extends Component {
@@ -21,9 +23,9 @@ class PageProfileProvider extends Component {
   };
 
   componentDidMount = () => {
-    request.get(request.routes.API_PROVIDER_BY_ID, {
-      id: this.props.match.params.providerId 
-    }).then((res) => {
+    request.get2(request.routes.API_PROVIDER_BY_ID, {
+      provider_id: this.props.match.params.providerId 
+    }, session.authHeaders()).then((res) => {
         this.setState({
           provider: res.data,
           providerValid: res.data ? true : false,

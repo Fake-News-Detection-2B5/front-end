@@ -34,8 +34,9 @@ class PageLanding extends Component {
       return;
     }
 
-    if(await session.register(username, email, password))
-      this.forceUpdate();
+    if(await session.register(username, email, password)) {
+      window.location.reload();
+    }
   };
 
   componentDidMount = () => {
