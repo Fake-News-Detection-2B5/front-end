@@ -38,7 +38,7 @@ class PageFeed extends Component {
 
   loadPosts = (count) => {
     request
-      .get2(request.routes.API_POST_GET_INTERVAL, {
+      .get3(request.routes.API_POST_GET_INTERVAL, {
         skip: this.state.postIndex,
         count: count,
       }, session.authHeaders())

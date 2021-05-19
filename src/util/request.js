@@ -52,6 +52,14 @@ export default {
             headers: headers ?? {}
         });
     },
+    get3: (path, data, headers) => {
+        return axios({
+            method: "get",
+            url: helper.pathJoin(routes.API_URL, path),
+            params: data,
+            headers: headers ?? {}
+        });
+    },
     post2: (path, data, headers) => {
         return axios({
             method: "post",
