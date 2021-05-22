@@ -26,16 +26,10 @@ class PageFAQ extends Component {
         count: "3",
         question: "Why do I need an account?",
         answer:
-          "An account is needed so you can receive news from only from the the providers that you want.",
+          "An account is needed so you can receive news from only from the providers that you want.",
       },
       {
         count: "4",
-        question: "What does the percentage of a news mean?",
-        answer:
-          "The percentage represents the probability how much of a piece of news is fake.",
-      },
-      {
-        count: "5",
         question: "How can I change the providers that I am following?",
         answer: (
           <React.Fragment>
@@ -50,7 +44,7 @@ class PageFAQ extends Component {
         ),
       },
       {
-        count: "6",
+        count: "5",
         question: "Can I access the profile of a news provider?",
         answer: (
           <React.Fragment>
