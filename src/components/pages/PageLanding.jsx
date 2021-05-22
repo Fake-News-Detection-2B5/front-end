@@ -124,7 +124,7 @@ class PageLanding extends Component {
       this.setState({
         alert: (
           <Alert id={"animation"} key={"somekey"} variant={"danger"}>
-            Invalid username or username is shorter than 6 characters!
+            Username is invalid or shorter than 6 characters!
           </Alert>
         ),
       });
@@ -156,7 +156,7 @@ class PageLanding extends Component {
       this.setState({
         alert: (
           <Alert id={"animation"} key={"somekey"} variant={"danger"}>
-            Invalid password or password is shorter than 8 characters!
+            Password is invalid or shorter than 8 characters!
           </Alert>
         ),
       });
@@ -191,7 +191,7 @@ class PageLanding extends Component {
       this.setState({
         alert: (
           <Alert id={"animation"} key={"somekey"} variant={"success"}>
-            Register successfully!
+            Registered successfully! You can now log in.
           </Alert>
         ),
         isLogin: true,

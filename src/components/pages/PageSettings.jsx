@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Button, Tabs, Tab, Form, Pagination, Modal } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Tabs,
+  Tab,
+  Form,
+  Pagination,
+  Modal,
+} from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import CommonNavbar from "../common/CommonNavbar.jsx";
@@ -26,6 +34,7 @@ let PageSettings = () => {
     index: 1,
     count: 0,
   });
+  let [alert, setAlert] = useState(null);
   let [sessionInterval, setSessionInterval] = useState(null);
   let [fileUpload, setFileUpload] = useState(null);
   let [, updateState] = React.useState();
@@ -57,29 +66,6 @@ let PageSettings = () => {
   let handleBioKeyChange = (event) => {
     setBio(event.target.value);
   };
-
-
-  let handleBioChange = async () => {
-    console.log(passwordUser);
-    request
-      .put2(
-        request.routes.API_USER_UPDATE,
-        {
-          id: session.get().userId,
-          bio: Bio,
-        },
-        session.authHeaders()
-      )
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => {
-        session.onUpdate();
-        console.error(err);
-      });
-  };
-
 
   let handleWeakRegex = (pass) => {
     const weakRegex = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,32}$/g;
@@ -136,7 +122,7 @@ let PageSettings = () => {
           count: Math.min(
             PAGINATION_PROVIDERS_PER_PAGE,
             provider.count -
-            PAGINATION_PROVIDERS_PER_PAGE * (pagination.index - 1)
+              PAGINATION_PROVIDERS_PER_PAGE * (pagination.index - 1)
           ),
           query: query,
         },
@@ -270,10 +256,28 @@ let PageSettings = () => {
           session.authHeaders()
         )
         .then((res) => {
-          console.log(res);
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+          setAlert(
+            <Alert id={"animation"} key={"somekey"} variant={"success"}>
+              Preferences updated!
+            </Alert>
+          );
+          setTimeout(() => {
+            setAlert(null);
+          }, 4000);
         })
         .catch((err) => {
-          session.onUpdate();
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+          setAlert(
+            <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+              Internal server error!
+            </Alert>
+          );
+          setTimeout(() => {
+            setAlert(null);
+          }, 4000);
           console.error(err);
         });
     });
@@ -298,27 +302,93 @@ let PageSettings = () => {
         session.authHeaders()
       )
       .then((res) => {
-        console.log(res);
-        window.location.reload();
+        //console.log(res);
+        handleModalClose();
+        session.get().avatar = imageUrl;
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"success"}>
+            Image changed successfully!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
       })
       .catch((err) => {
-        session.onUpdate();
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+            Internal server error!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        console.error(err);
+      });
+  };
+
+  let handleBioChange = async () => {
+    console.log(passwordUser);
+    request
+      .put2(
+        request.routes.API_USER_UPDATE,
+        {
+          id: session.get().userId,
+          bio: Bio,
+        },
+        session.authHeaders()
+      )
+      .then((res) => {
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"success"}>
+            Bio changed successfully!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        return;
+      })
+      .catch((err) => {
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+            Internal server error!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        return;
         console.error(err);
       });
   };
 
   let handlePasswordChange = async () => {
     console.log(passwordUser);
-    if(!handlePassword(passwordUser)) {
-      alert('Invalid password');
+    if (!handlePassword(passwordUser)) {
+      setAlert(
+        <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+          Incorrect username or password!
+        </Alert>
+      );
+      setTimeout(() => {
+        setAlert(null);
+      }, 4000);
       return;
     }
 
-    if(passwordUser !== confirmPasswordUser) {
-      alert('Passwords do not match');
+    if (passwordUser !== confirmPasswordUser) {
+      setAlert(
+        <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+          Passwords do not match!
+        </Alert>
+      );
+      setTimeout(() => {
+        setAlert(null);
+      }, 4000);
       return;
     }
-    
+
     request
       .put2(
         request.routes.API_USER_UPDATE,
@@ -330,10 +400,27 @@ let PageSettings = () => {
       )
       .then((res) => {
         console.log(res);
-        window.location.reload();
+
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"success"}>
+            Password changed successfully!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        return;
+        //window.location.reload();
       })
       .catch((err) => {
-        session.onUpdate();
+        setAlert(
+          <Alert id={"animation"} key={"somekey"} variant={"danger"}>
+            Password changed successfully!
+          </Alert>
+        );
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
         console.error(err);
       });
   };
@@ -364,6 +451,7 @@ let PageSettings = () => {
       <RedirectIfNeeded></RedirectIfNeeded>
       <CommonNavbar authenticated />
       <div id="settings-container">
+        <alertMessage>{alert}</alertMessage>
         <Tabs defaultActiveKey="account" className="justify-content-center">
           <Tab eventKey="account" title="Account Settings">
             <div className="tab-custom-container">
@@ -427,9 +515,7 @@ let PageSettings = () => {
                         onChange={handleConfirmPassKeyChange}
                       />
                     </Form.Group>
-                    <Button
-                      onClick={handlePasswordChange}
-                    >
+                    <Button onClick={handlePasswordChange}>
                       Change password
                     </Button>
                   </div>
@@ -511,7 +597,7 @@ let PageSettings = () => {
                       let i = pagination.index - 1;
                       i >= 1 &&
                       i >=
-                      pagination.index - (PAGINATION_VISIBLE_COUNT - 1) / 2;
+                        pagination.index - (PAGINATION_VISIBLE_COUNT - 1) / 2;
                       --i
                     ) {
                       list.push(
@@ -540,7 +626,7 @@ let PageSettings = () => {
                       let i = pagination.index + 1;
                       i <= pagination.count &&
                       i <=
-                      pagination.index + (PAGINATION_VISIBLE_COUNT - 1) / 2;
+                        pagination.index + (PAGINATION_VISIBLE_COUNT - 1) / 2;
                       ++i
                     ) {
                       list.push(
