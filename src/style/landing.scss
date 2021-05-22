@@ -1,12 +1,39 @@
 panel {
   display: grid;
   width: 100%;
-  height: 95%;
-  margin-top: 5%;
+  height: 70%;
+  margin-top: 23%;
   grid-column-start: 9;
   grid-column-end: 12;
   grid-row-start: 3;
-  grid-row-end: 8;
+  grid-row-end: 9;
+}
+
+grid-logo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  margin-right: 20px;
+  margin-top: -10px;
+}
+
+grid-welcome {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  grid-column-start: 4;
+  grid-column-end: 13;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+grid-welcome h1 {
+  font-size: 2.5em;
 }
 
 alertMessage {
@@ -43,8 +70,8 @@ grid-image {
   height: 100%;
   grid-column-start: 3;
   grid-column-end: 8;
-  grid-row-start: 2;
-  grid-row-end: 10;
+  grid-row-start: 3;
+  grid-row-end: 9;
 }
 
 #fullview {
@@ -148,4 +175,20 @@ phantom-div {
   width: 80%;
   visibility: hidden;
   margin-bottom: 1rem;
+}
+
+#faq-header-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#faq-logo-container {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#faq-logo {
+  box-shadow: $shadow;
 }
