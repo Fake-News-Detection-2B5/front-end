@@ -1,9 +1,8 @@
 import React, { useState, Component } from "react";
 import { Alert, Button, Container, Col, Row } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 import CommonFooter from "../common/CommonFooter.jsx";
-import Animation from "../utility/Animation-btn.jsx";
-import Auth0Btn from "../utility/Auth0Btn.jsx";
 import { Redirect } from "react-router";
 
 import "../../style/style.scss";
@@ -241,6 +240,21 @@ class PageLanding extends Component {
     return (
       <React.Fragment>
         <grid-template>
+          <grid-logo>
+            <LinkContainer to="/">
+              <img
+                id="faq-logo"
+                className="rounded-img"
+                src={process.env.PUBLIC_URL + "/res/img/logo512.png"}
+                alt="brand logo"
+                width="90px"
+                height="90px"
+              />
+            </LinkContainer>
+          </grid-logo>
+          <grid-welcome>
+            <h1>Welcome to Fake News Detector!</h1>
+          </grid-welcome>
           <grid-image>
             <img
               src={"../../../res/img/landingpage.svg"}
