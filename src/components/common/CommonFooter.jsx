@@ -21,10 +21,6 @@ class CommonFooter extends Component {
                         <a className="footer-contact-label" href="https://github.com/orgs/Fake-News-Detection-2B5/teams/front-end">
                             Our Github
                         </a>
-                        &#124;
-                        <a className="footer-contact-label" href="https://github.com/orgs/Fake-News-Detection-2B5/teams/front-end">
-                            Our Github
-                        </a>
                     </div>
                     {
                         this.state.showFAQ ? 

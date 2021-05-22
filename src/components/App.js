@@ -24,7 +24,7 @@ class App extends Component {
       try {
         this.forceUpdate();
       } catch(ex) {
-        
+
       }
     }
   }
@@ -43,6 +43,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={PageLanding} />
+          <Route exact path="/faq" component={PageFAQ} />
 
           <Auth>
             <React.Fragment>
@@ -52,8 +53,6 @@ class App extends Component {
                 <Route exact path="/profile" component={PageProfile} />
 
                 <Route exact path="/settings" component={PageSettings} />
-
-                <Route exact path="/faq" component={PageFAQ} />
 
                 <Route exact path="/setup" component={PageSetup} />
 
