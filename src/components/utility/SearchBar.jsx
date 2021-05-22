@@ -8,8 +8,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Redirect } from "react-router";
 
 import '../../style/style.scss';
-import ProviderPreference from "../utility/ProviderPreference.jsx";
 
+import ProviderPreference from "../utility/ProviderPreference.jsx";
+import FilterModal from "./FilterModal.jsx";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
 import request from "../../util/request.js";
@@ -31,7 +32,7 @@ class SearchBar extends Component {
             count: 0
         },
         sessionInterval: null,
-        redirectComponent: null
+        redirectComponent: null,
     };
 
     updateProviders = () => {
@@ -97,6 +98,7 @@ class SearchBar extends Component {
                 <div id="navbar-parent">
                     <Form id="navbar-search">
                         <Form.Control type="text" placeholder="Search..." onChange={this.handleSearchChange} onKeyPress={this.handleSearchKeyPress} />
+                        <FilterModal />
                         <Button id="preferences-setup-search-button" variant="primary" onClick={this.handleSearch}>
                             Search
                         </Button>

@@ -31,7 +31,7 @@ class CommonNavbar extends Component {
           {this.props.authenticated ? (
             this.props.withSearch ? (
               <React.Fragment>
-                
+
                 <SearchBar />
               
                 <Navbar.Collapse>

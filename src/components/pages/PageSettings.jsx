@@ -462,7 +462,7 @@ let PageSettings = () => {
                       <JustUserPicture />
                       <Modal show={showModal} onHide={handleModalClose}>
                         <Modal.Header closeButton>
-                          <Modal.Title>Modal heading</Modal.Title>
+                          <Modal.Title>Please write an image URL</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Form.Group
