@@ -35,8 +35,9 @@ let PageSettings = () => {
   //TEMPORAL
   let [imageUrl, setImageUrl] = useState("");
   let [passwordUser, setPasswordUser] = useState("");
+  let [confirmPasswordUser, setConfirmPasswordUser] = useState("");
 
-  let [Bio, setBio] = useState("");  
+  let [Bio, setBio] = useState("");
   let [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -79,6 +80,51 @@ let PageSettings = () => {
       });
   };
 
+
+  let handleWeakRegex = (pass) => {
+    const weakRegex = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,32}$/g;
+    // string must containt at least one digit and alphabetical letter with the a minimum length of 8 and a maximum length of 32
+
+    if (!weakRegex.test(pass)) {
+      return false;
+    }
+    return true;
+  };
+
+  let handleMediumRegex = (pass) => {
+    const mediumRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{8,32}$/g;
+    // string must containt at least one digit, one lowercase alphabetical letter and one uppercase alphabetical letter with the a minimum length of 8 and a maximum length of 32
+
+    if (!mediumRegex.test(pass)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  let handleStrongRegex = (pass) => {
+    const strongRegex =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+\[\]{}<.>/?~])[A-Za-z0-9!@#$%^&*()\-_=+\[\]{}<.>/?~]{8,32}$/g;
+    // string must containt one digit, one lowercase alphabetical letter, one uppercase alphabetical letter and one of the specified special characters with the a minimum length of 8 and a maximum length of 32
+
+    if (!strongRegex.test(pass)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  let handlePassword = (pass) => {
+    if (!handleStrongRegex(pass)) {
+      if (!handleMediumRegex(pass)) {
+        if (!handleWeakRegex(pass)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   let updateProviders = () => {
     request
       .get2(
@@ -90,7 +136,7 @@ let PageSettings = () => {
           count: Math.min(
             PAGINATION_PROVIDERS_PER_PAGE,
             provider.count -
-              PAGINATION_PROVIDERS_PER_PAGE * (pagination.index - 1)
+            PAGINATION_PROVIDERS_PER_PAGE * (pagination.index - 1)
           ),
           query: query,
         },
@@ -263,6 +309,16 @@ let PageSettings = () => {
 
   let handlePasswordChange = async () => {
     console.log(passwordUser);
+    if(!handlePassword(passwordUser)) {
+      alert('Invalid password');
+      return;
+    }
+
+    if(passwordUser !== confirmPasswordUser) {
+      alert('Passwords do not match');
+      return;
+    }
+    
     request
       .put2(
         request.routes.API_USER_UPDATE,
@@ -296,6 +352,11 @@ let PageSettings = () => {
   let handlePassKeyChange = (event) => {
     console.log(passwordUser);
     setPasswordUser(event.target.value);
+  };
+
+  let handleConfirmPassKeyChange = (event) => {
+    console.log(confirmPasswordUser);
+    setConfirmPasswordUser(event.target.value);
   };
 
   return (
@@ -349,19 +410,29 @@ let PageSettings = () => {
                 </div>
 
                 <div id="password-container" className="justify-content-center">
-                  <Form.Group controlId="formchangePassword" id="formmargin">
-                    <Form.Control
-                      type="password"
-                      placeholder="New Password"
-                      onChange={handlePassKeyChange}
-                    />
-                  </Form.Group>
-                  <Button
-                    className="settings-button"
-                    onClick={handlePasswordChange}
-                  >
-                    Change password
-                  </Button>
+                  <div className="password-container-row">
+                    <Form.Group controlId="formchangePassword" id="formmargin">
+                      <Form.Control
+                        type="password"
+                        placeholder="New Password"
+                        onChange={handlePassKeyChange}
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="password-container-row">
+                    <Form.Group>
+                      <Form.Control
+                        type="password"
+                        placeholder="Confirm New Password"
+                        onChange={handleConfirmPassKeyChange}
+                      />
+                    </Form.Group>
+                    <Button
+                      onClick={handlePasswordChange}
+                    >
+                      Change password
+                    </Button>
+                  </div>
                 </div>
 
                 <div id="bio-container" className="justify-content-center">
@@ -440,7 +511,7 @@ let PageSettings = () => {
                       let i = pagination.index - 1;
                       i >= 1 &&
                       i >=
-                        pagination.index - (PAGINATION_VISIBLE_COUNT - 1) / 2;
+                      pagination.index - (PAGINATION_VISIBLE_COUNT - 1) / 2;
                       --i
                     ) {
                       list.push(
@@ -469,7 +540,7 @@ let PageSettings = () => {
                       let i = pagination.index + 1;
                       i <= pagination.count &&
                       i <=
-                        pagination.index + (PAGINATION_VISIBLE_COUNT - 1) / 2;
+                      pagination.index + (PAGINATION_VISIBLE_COUNT - 1) / 2;
                       ++i
                     ) {
                       list.push(
