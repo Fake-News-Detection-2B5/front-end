@@ -118,7 +118,7 @@ export default {
 
             // cookies.set("user_id", session.data.userId, { path: "/" });
             // cookies.set("token", session.data.token, { path: "/" });
-            return Promise.resolve(res.data === 'true');
+            return Promise.resolve(res.data == true);
         } catch(err) {
             console.error(err);
             return Promise.resolve(false);

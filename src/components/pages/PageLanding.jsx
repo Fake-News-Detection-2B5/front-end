@@ -195,6 +195,7 @@ class PageLanding extends Component {
             Register successfully!
           </Alert>
         ),
+        isLogin: true,
       });
       setTimeout(() => {
         this.setState({
