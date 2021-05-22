@@ -44,7 +44,7 @@ class PageProfileProvider extends Component {
     return (
       <React.Fragment>
         <RedirectIfNeeded></RedirectIfNeeded>
-      {this.state.providerValid == false ? <Redirect to="/feed" /> : 
+      {this.state.providerValid === true && this.state.providerValid === false ? <Redirect to="/feed" /> : 
       <React.Fragment>
         <CommonNavbar authenticated />
         {this.state.providerReady ? 
