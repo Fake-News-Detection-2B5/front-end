@@ -6,6 +6,11 @@ footer {
 }
 
 .footer-fixed {
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-sticky {
     position: sticky;
     bottom: 0;
 }

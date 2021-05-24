@@ -113,7 +113,7 @@ class PageFeed extends Component {
             return <CommonPost {...post} key={`post-${post.id}`} />;
           })}
         </main>
-        <CommonFooter fixed />
+        <CommonFooter fixed /> {/*{...(this.state.postsLoading ? {fixed: true} : {sticky: true})}*/}
       </React.Fragment>
     );
   }

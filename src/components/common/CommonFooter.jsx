@@ -14,7 +14,7 @@ class CommonFooter extends Component {
     render() {
       return (
         <React.Fragment>
-            <footer className={this.props.fixed ? "footer-fixed" : ""}>
+            <footer className={this.props.fixed ? "footer-fixed" : (this.props.sticky ? "footer-sticky" : "")}>
                 <div className="footer-container">
                     <div>
                         Contact:
