@@ -16,80 +16,19 @@ import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 import request from "../../util/request.js";
 import session from "../../util/session.js";
 
-const PAGINATION_VISIBLE_COUNT = 6;
-const PAGINATION_PROVIDERS_PER_PAGE = 6;
-
 class SearchBar extends Component {
-    state = {
-        provider: {
-            count: 0,
-            list: []
-        },
-        query: "",       // chanes when pressing search
-        searchQuery: "", // changes with key presses
-        pagination: {
-            index: 1,
-            count: 0
-        },
-        sessionInterval: null,
-        redirectComponent: null,
-    };
-
-    updateProviders = () => {
-        request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH : request.routes.API_PROVIDER_GET_INTERVAL, {
-            skip: PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1),
-            count: Math.min(PAGINATION_PROVIDERS_PER_PAGE, this.state.provider.count - PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1)),
-            query: this.state.query
-        }).then((res) => {
-            console.log(res.data);
-            this.setState({
-                provider: {
-                    ...this.state.provider,
-                    list: res.data
-                }
-            })
-        }).catch((err) => {
-            console.error(err);
-        });
-    }
-
-    updateProviderCount = () => {
-        request.get(this.state.searchQuery.length > 0 ? request.routes.API_PROVIDER_SEARCH_COUNT : request.routes.API_PROVIDER_COUNT, {
-            query: this.state.query
-        }).then((res) => {
-            let providerCount = res.data.count;
-
-            this.setState({
-                provider: {
-                    ...this.state.provider,
-                    count: providerCount
-                },
-                pagination: {
-                    ...this.state.pagination,
-                    count: (Math.ceil(providerCount / PAGINATION_PROVIDERS_PER_PAGE))
-                }
-            });
-
-            this.updateProviders();
-        }).catch((err) => {
-            console.error(err);
-        });
-    }
+    state = { };
 
     handleSearchChange = (event) => {
-        this.setState({ searchQuery: event.target.value });
+        console.log('onChange: ' + event.target.value);
+    }
+
+    handleSearchKeyPress = (event) => {
+        console.log('onKeyPress: ' + event.target.value);
     }
 
     handleSearch = () => {
-        this.setState({
-            query: this.state.searchQuery
-        }, () => {
-            this.updateProviderCount();
-
-            console.log(`Search: ${this.state.query}`);
-
-            this.updateProviderCount();
-        })
+        console.log('Button for search pressed');
     }
 
     render() {

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Modal, Form, ListGroup, Button } from "react-bootstrap";
 
+
+
 class FilterModal extends Component {
     state = {
         show: false,
@@ -129,6 +131,7 @@ class FilterModal extends Component {
 
                 <Button
                     onClick={this.handleModalOpen}
+                    id="filter-button"
                 >
                     {""}
                     Filter{""}
