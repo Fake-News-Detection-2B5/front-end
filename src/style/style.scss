@@ -58,6 +58,16 @@ img {
   box-shadow: $shadow-small;
 }
 
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+
 @import "./faq.scss";
 @import "./feed.scss";
 @import "./footer.scss";

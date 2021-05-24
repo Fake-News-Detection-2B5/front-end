@@ -9,28 +9,31 @@ class ProviderPreference extends Component {
     return (
       <React.Fragment>
         <div className="preference-provider">
-          <img
-            className="photo-border"
-            src={this.props.avatar}
-            width="128"
-            height="128"
-          />
-          <div className="preference-provider-info">
-            <p> {this.props.name} </p>
-            <p> Credibility: {this.props.credibility}% </p>
-            
+          <LinkContainer to={"/" + this.props.id}>
+            <img
+              className="photo-border"
+              src={this.props.avatar}
+              width="128"
+              height="128"
+            />
+          </LinkContainer>
+          <div className="preference-provider-flexer">
+            <LinkContainer to={"/" + this.props.id}>
+              <span className="preference-provider-info-name"> {this.props.name} </span>
+            </LinkContainer>
+            <Form className="ml-auto subscribe-form">
+              <div key={`provider-checkbox` + this.props.name} className="mb-3">
+                <Form.Check
+                  variant="primary"
+                  type="checkbox"
+                  id={`provider-checkbox` + this.props.name}
+                  label={`Subscribed`}
+                  onChange={() => { this.props.onChange(); }}
+                  checked={this.props.checked}
+                />
+              </div>
+            </Form>
           </div>
-          <Form className="ml-auto subscribe-form">
-            <div key={`provider-checkbox` + this.props.name} className="mb-3">
-              <Form.Check
-                type="checkbox"
-                id={`provider-checkbox` + this.props.name}
-                label={`Subscribed`}
-                onChange={() => {this.props.onChange();}}
-                checked={this.props.checked}
-              />
-            </div>
-          </Form>
         </div>
       </React.Fragment>
     );

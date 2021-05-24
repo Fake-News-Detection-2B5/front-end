@@ -71,7 +71,7 @@ body {
 }
 
 #preferences-settings-search {
-  width: 25%;
+  width: 40%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -88,7 +88,7 @@ body {
   flex-direction: row;
   align-items: center;
   box-shadow: $shadow-small;
-
+  
   margin: 2%;
 }
 
@@ -102,24 +102,24 @@ body {
   align-items: center;
 }
 
-.preference-provider-info p {
-  margin-left: 45%;
+.preference-provider-info-name {
   width: 100%;
 
   font-size: 2em;
 }
 
-.preference-provider-info p:first-child {
+.preference-provider-info-name:first-child {
   font-weight: bold;
 }
 
 #settings-save-btn {
-  margin-left: 90%;
-  width: 10%;
+  text-align: center;
 }
 
 .photo-border {
   border: 1px solid #000000;
+
+  cursor: pointer;
 }
 
 #formmargin {
@@ -179,4 +179,142 @@ alertMessage {
   height: 65px;
   margin-left: calc(30%);
   margin-top: -5%;
+}
+
+.preference-provider-flexer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10px;
+
+  width: 100%;
+}
+
+.form-check-label {
+  margin-top: 2.5px;
+  margin-left: 5px;
+}
+
+.form-check-label:before{
+  background-color:red;
+}
+
+.form-check-input:checked~.form-check-label::before{
+  background-color:black;
+}
+
+/* STANDARD SIZE */
+@media only screen and (max-width: 1024px) {
+  #preferences-settings-search {
+    width: 60%;
+  }
+
+  #settings-save-btn {
+    font-size: 0.75em;
+  }
+
+  #btnBio {
+    left: 100%;
+    top: 29%;
+  }
+
+  .photo-border {
+    width: 102px;
+    height: 102px;
+  }
+
+  .preference-provider-info-name {
+    margin: 0;
+    cursor: pointer;
+  }
+
+}
+
+/* STANDARD SIZE */
+@media only screen and (max-width: 800px) {
+  .preference-provider-info-name {
+    font-size: 1.5em;
+  }
+
+  .preference-provider {
+
+  }
+
+  .subscribe-form {
+    margin: 0 !important;
+  }
+
+  .preference-provider-flexer {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 13px;
+  }
+
+  #settings-preferences-pagination {
+    margin-top: 5px;
+  }
+
+  #settings-save-btn {
+    font-size: 0.7em;
+
+    text-align: center;
+  }
+
+  #btnBio {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #btnBio {
+    top: 100%;
+    left: 27%;
+    margin-top: 1px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #btnBio {
+    top: 100%;
+    left: 22%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #btnBio {
+    top: 100%;
+    left: 20%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #btnBio {
+    top: 100%;
+    left: 15%;
+  }
+
+  .photo-border {
+    width: 64px;
+    height: 64px;
+  }
+
+  .preference-provider-info-name {
+    font-size: 1em;
+  }
+  
+  #settings-save-btn {
+    position: relative;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* STANDARD SIZE */
+@media only screen and (max-width: 375px) {
+  #btnBio {
+    top: 100%;
+    left: 13%;
+  }
 }
