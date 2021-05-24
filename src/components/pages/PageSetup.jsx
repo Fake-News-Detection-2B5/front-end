@@ -5,7 +5,6 @@ import { Button, Tabs, Tab, Form, Pagination } from "react-bootstrap";
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import { LinkContainer } from "react-router-bootstrap";
-import { Redirect } from "react-router";
 
 import '../../style/style.scss';
 import ProviderPreference from "../utility/ProviderPreference.jsx";
@@ -47,8 +46,6 @@ class PageSetup extends Component {
         }
       }, 10);
     }
-
-    this.shouldRedirect();
   }
 
   updateProviders = () => {
@@ -101,7 +98,7 @@ class PageSetup extends Component {
         uid: session.get().userId,
         prov_id: provider.id
       }, session.authHeaders()).then((res) => {
-          let checked = (res.data.toString().trim().toLowerCase() === "true");
+          let checked = (res.data.toString().trim().toLowerCase() === "1");
           
           this.state.provider.list[index].checked = checked;
           this.setState();
@@ -161,20 +158,6 @@ class PageSetup extends Component {
           session.onUpdate();
           console.error(err);
       });
-    });
-  }
-
-  shouldRedirect = () => {
-    request.get2(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
-      uid: session.get().userId,
-      skip: 0,
-      count: 100
-    }, session.authHeaders()).then((res) => {
-        console.log(res.data);
-        this.setState({redirectComponent: res.data.length > 0 ? <Redirect to="/feed" /> : ""});
-      }).catch((err) => {
-        session.onUpdate();
-        console.error(err);
     });
   }
 

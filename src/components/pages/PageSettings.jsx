@@ -198,7 +198,7 @@ let PageSettings = () => {
           session.authHeaders()
         )
         .then((res) => {
-          let checked = res.data.toString().trim().toLowerCase() === "true";
+          let checked = res.data.toString().trim().toLowerCase() === "1";
 
           provider.list[index].checked = checked; //@SEE
           forceUpdate();

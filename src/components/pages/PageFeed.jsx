@@ -7,6 +7,7 @@ import CommonFooter from "../common/CommonFooter.jsx";
 import CommonPost from "../common/CommonPost.jsx";
 import request from "../../util/request.js";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
+import { Redirect } from "react-router";
 
 import session from "../../util/session";
 
@@ -25,6 +26,8 @@ class PageFeed extends Component {
   componentDidMount = () => {
     this.loadPosts(POST_INITIAL_COUNT);
     window.addEventListener("scroll", this.listenToScroll, true);
+
+    this.shouldRedirect();
   };
 
   componentWillUnmount() {
@@ -76,6 +79,20 @@ class PageFeed extends Component {
         console.error(err);
       });
   };
+
+  shouldRedirect = () => {
+    request.get2(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
+      uid: session.get().userId,
+      skip: 0,
+      count: 10
+    }, session.authHeaders()).then((res) => {
+        console.log(res.data);
+        this.setState({redirectComponent: res.data.length == 0 ? <Redirect to="/setup" /> : ""});
+      }).catch((err) => {
+        session.onUpdate();
+        console.error(err);
+    });
+  }
 
   render() {
     return (

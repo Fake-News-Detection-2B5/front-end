@@ -17,6 +17,7 @@ routes['API_PROVIDER_GET_BY_NAME'] = `${routes.API_PROVIDER}/getByName`;
 
 routes['API_POST'] = '/post';
 routes['API_POST_GET_INTERVAL'] = `${routes.API_POST}/getInterval`;
+routes['API_POST_GET_INTERVAL_BY_PROVIDER'] = `${routes.API_POST}/getIntervalByProvider`;
 
 routes['API_USER'] = '/user';
 routes['API_USER_LOGIN'] = `${routes.API_USER}/login`
