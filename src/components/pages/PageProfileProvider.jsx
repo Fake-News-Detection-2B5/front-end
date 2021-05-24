@@ -47,8 +47,14 @@ class PageProfileProvider extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.listenToScroll);
+    window.removeEventListener("scroll", this.listenToScroll, true);
   }
+
+  listenToScroll = (e) => {
+    if (e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight) {
+      this.loadPosts(POST_LOAD_COUNT);
+    }
+  };
 
   loadPosts = (count) => {
     request

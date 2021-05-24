@@ -21,17 +21,19 @@ class PageFeed extends Component {
     posts: [],
     postsLoading: true,
     postIndex: 0,
+    loadingPosts: false,
   };
 
   componentDidMount = () => {
     this.loadPosts(POST_INITIAL_COUNT);
+
     window.addEventListener("scroll", this.listenToScroll, true);
 
     this.shouldRedirect();
   };
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.listenToScroll);
+    window.removeEventListener("scroll", this.listenToScroll, true);
   }
 
   listenToScroll = (e) => {
@@ -41,6 +43,11 @@ class PageFeed extends Component {
   };
 
   loadPosts = (count) => {
+    if(this.state.loadingPosts) {
+      return;
+    }
+    this.setState({loadingPosts: true});    
+    this.state.loadingPosts = true;
     request
       .get2(request.routes.API_POST_GET_INTERVAL, {
         skip: this.state.postIndex,
@@ -69,6 +76,8 @@ class PageFeed extends Component {
           postIndex: this.state.postIndex + count,
           postsLoading: false
         });
+        this.setState({loadingPosts: false});
+        this.state.loadingPosts = false; 
       })
       .catch((err) => {
         this.setState({
