@@ -130,6 +130,7 @@ class FilterModal extends Component {
                 </Modal>
 
                 <Button
+                    id="nav-filter-button"
                     onClick={this.handleModalOpen}
                     id="filter-button"
                 >

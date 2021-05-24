@@ -18,6 +18,7 @@ const POST_LOAD_COUNT = 5;
 class PageFeed extends Component {
   state = {
     posts: [],
+    postsLoading: true,
     postIndex: 0,
   };
 
@@ -38,7 +39,7 @@ class PageFeed extends Component {
 
   loadPosts = (count) => {
     request
-      .get3(request.routes.API_POST_GET_INTERVAL, {
+      .get2(request.routes.API_POST_GET_INTERVAL, {
         skip: this.state.postIndex,
         count: count,
       }, session.authHeaders())
@@ -63,9 +64,14 @@ class PageFeed extends Component {
             })
           ),
           postIndex: this.state.postIndex + count,
+          postsLoading: false
         });
       })
       .catch((err) => {
+        this.setState({
+          postsLoading: false
+        });
+        
         session.onUpdate();
         console.error(err);
       });
@@ -77,7 +83,7 @@ class PageFeed extends Component {
         <RedirectIfNeeded></RedirectIfNeeded>
         <CommonNavbar authenticated withSearch />
         <main id="main-feed">
-          {this.state.posts.map((post) => {
+          {this.state.postsLoading ? "Loading..." : this.state.posts.map((post) => {
             return <CommonPost {...post} key={`post-${post.id}`} />;
           })}
         </main>

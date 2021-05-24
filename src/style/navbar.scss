@@ -6,12 +6,19 @@
     margin-left: 10px;
 }
 
-#navbar-search {
+#navbar-parent {
     width: 100%;
+}
+
+#navbar-search {
+    width: 400px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-left: 10%;
+}
+
+#nav-filter-button {
+    margin-left: 10px;
 }
 
 // #navbar-parent {
