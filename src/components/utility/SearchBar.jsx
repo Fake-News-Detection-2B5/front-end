@@ -36,9 +36,9 @@ class SearchBar extends Component {
             <React.Fragment>
                 <div id="navbar-parent">
                     <Form id="navbar-search">
-                        <Form.Control type="text" placeholder="Search..." onChange={this.handleSearchChange} onKeyPress={this.handleSearchKeyPress} />
-                        <FilterModal />
-                        <Button id="preferences-setup-search-button" variant="primary" onClick={this.handleSearch}>
+                        <Form.Control type="text" placeholder="Search..." onChange={this.props.onSearchChange} />
+                        <FilterModal onDateChange={this.props.onDateChange} onOrderChange={this.props.onOrderChange} onFilter={this.props.onFilter} />
+                        <Button id="preferences-setup-search-button" variant="primary" onClick={this.props.onFilter}>
                             Search
                         </Button>
                     </Form>

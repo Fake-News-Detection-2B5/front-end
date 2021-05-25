@@ -11,7 +11,7 @@
 }
 
 #navbar-search {
-    width: 400px;
+    max-width: 400px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -19,6 +19,15 @@
 
 #nav-filter-button {
     margin-left: 10px;
+}
+
+@media only screen and (max-width: 580px) {
+    .navbar-nav {
+        margin: 0 auto !important;
+    }
+    #navbar-parent {
+        width: 80%;
+    }
 }
 
 // #navbar-parent {
