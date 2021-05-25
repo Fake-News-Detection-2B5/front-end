@@ -26,7 +26,7 @@ class PageFeed extends Component {
     loadingPosts: false,
     search: "",
     date: "",
-    order: ""
+    order: "desc"
   };
 
   componentDidMount = () => {

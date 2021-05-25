@@ -8,7 +8,7 @@ class FilterModal extends Component {
         show: false,
         filter: {
             date: 0,
-            ascendant: true
+            ascendant: false
         }
     };
 
