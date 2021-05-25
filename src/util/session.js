@@ -108,7 +108,7 @@ export default {
             let res = await request.post2json(request.routes.API_USER_REGISTER, {
                 username: username,
                 passwordHash: pass,
-                avatarUrl: "https://lh3.googleusercontent.com/proxy/8p__HGaB55yI0l3lJcc04OcM2kQ4_nJdsCc-kBUshfvRASIuRgKj2dpv9N_w1Nrr7eGBNCb-exIgZq4gTIpO070iNzqlHzd1kYpuKp4Fhy7l8w",
+                avatarUrl: "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
                 bio: "I am " + username + " and this is my bio. Change me!",
                 email: email
             });
