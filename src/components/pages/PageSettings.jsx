@@ -464,7 +464,7 @@ let PageSettings = () => {
       <RedirectIfNeeded></RedirectIfNeeded>
       <CommonNavbar authenticated />
       <div id="settings-container">
-        <alertMessage>{alert}</alertMessage>
+        <alertMessageSettings>{alert}</alertMessageSettings>
         <Tabs defaultActiveKey="account" className="justify-content-center" onSelect={updateProviders}>
           <Tab eventKey="account" title="Account Settings">
             <div className="tab-custom-container">
