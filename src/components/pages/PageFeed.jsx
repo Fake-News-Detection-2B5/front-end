@@ -123,8 +123,9 @@ class PageFeed extends Component {
       postIndex: 0,
       postsLoading: true,
       loadingPosts: true
-    })
-    this.loadPosts(POST_INITIAL_COUNT);
+    }, () => {
+      this.loadPosts(POST_INITIAL_COUNT)
+    });
   }
 
   handleSearchChange = (event) => {
