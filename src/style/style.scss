@@ -7,8 +7,12 @@ $green-dark: #00aa00;
 $red-dark: #aa0000;
 $purple-dark: #4b0061;
 $orange: #ff8800;
+$invalid: #dd0000;
+$weak: #dddd00;
+$medium: #00dd00;
+$strong: #0088dd;
 $theme-colors: (
-  "primary": #00A846,
+  "primary": #00a846,
   "danger": #ff4136,
 );
 $shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -18,7 +22,7 @@ $shadow-small: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.19);
 
 ::selection {
   color: $white !important;
-  background: #00A846;
+  background: #00a846;
 }
 
 html,
@@ -59,7 +63,7 @@ img {
   box-shadow: $shadow-small;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
@@ -67,7 +71,6 @@ input[type=checkbox] {
 #root {
   overflow-x: hidden;
 }
-
 
 @import "./faq.scss";
 @import "./feed.scss";
@@ -79,4 +82,4 @@ input[type=checkbox] {
 @import "./profile.scss";
 @import "./settings.scss";
 @import "./setup.scss";
-@import "./filter_modal.scss"
+@import "./filter_modal.scss";
