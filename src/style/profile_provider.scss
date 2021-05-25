@@ -48,3 +48,32 @@
     justify-content: center;
     margin-left: 20px;
 }
+
+.main-profile-provider {
+    width: 40%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-profile-provider {
+        width: 60%;
+    }
+
+    #bio-container-provider {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .main-profile-provider {
+        width: 80%;
+    }
+
+    .post-description {
+        font-size: 0.8em;
+    }
+
+    #bio-container-provider {
+        width: 80%;
+    }
+}

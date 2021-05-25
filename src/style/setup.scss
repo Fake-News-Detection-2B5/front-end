@@ -96,3 +96,32 @@ body {
     padding: 4% 25% 2% 25%;
     text-align: center;
 }
+
+@media only screen and (max-width: 1024px) {
+  .setup-title {
+    font-size: 1.2em;
+    padding: 4% 5% 2% 5%;
+    text-align: center;
+  }
+
+  #setup-save-btn {
+    font-size: 0.75em;
+  }
+
+  #preferences-setup-search {
+    width: 50%;
+  }
+  
+}
+
+@media only screen and (max-width: 800px) {
+  #setup-save-btn {
+    font-size: 0.75em;
+    width: 20%;
+    margin: 0;
+  }
+
+  #preferences-setup-search {
+    width: 50%;
+  }
+}

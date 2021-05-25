@@ -125,7 +125,7 @@ class PageProfileProvider extends Component {
           <div id="bio-container-provider" className="justify-content-center">
             <div id="bio-text-container" >
               {this.state.provider.bio}
-                </div>
+            </div>
           </div>
         </div>
         <div id="horizontal-line">
@@ -133,7 +133,7 @@ class PageProfileProvider extends Component {
         </div>
 
         <div id="profile-posts">
-          <main>
+          <main className="main-profile-provider">
             {this.state.posts.map(post => {
               return <CommonPost {...post} />
             })}
