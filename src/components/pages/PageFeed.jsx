@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
@@ -110,7 +108,7 @@ class PageFeed extends Component {
       count: 10
     }, session.authHeaders()).then((res) => {
         console.log(res.data);
-        this.setState({redirectComponent: res.data.length == 0 ? <Redirect to="/setup" /> : ""});
+        this.setState({redirectComponent: res.data.length === 0 ? <Redirect to="/setup" /> : ""});
       }).catch((err) => {
         session.onUpdate();
         console.error(err);
@@ -157,7 +155,7 @@ class PageFeed extends Component {
         <main id="main-feed">
         {
             this.state.postsLoading ? <p id="feed-loading-label">Loading...</p> :
-              ((!this.state.posts || this.state.posts.length == 0) ? <p id="feed-loading-label">Whoops, there are no posts.</p> :
+              ((!this.state.posts || this.state.posts.length === 0) ? <p id="feed-loading-label">Whoops, there are no posts.</p> :
                 this.state.posts.map((post) => {
                   return <CommonPost {...post} key={`post-${post.id}`} />;
                 })

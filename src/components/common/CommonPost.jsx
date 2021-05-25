@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 import '../../style/style.scss';
@@ -84,7 +83,7 @@ class CommonPost extends Component {
                             </a>
                         </LinkContainer> */}
                             <span className="post-date"> {this.handleDate(this.props.date)} </span>
-                            <span className={`post-credibility-${this.props.fake === "true" ? 'good' : 'bad'}`}>
+                            <span className={`post-credibility-${this.props.fake === "true" ? 'good' : (this.props.fake === 'other' ? 'other' : 'bad')}`}>
                                 {this.props.fake}
                             </span>
                         </div>

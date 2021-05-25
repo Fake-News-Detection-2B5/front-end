@@ -1,17 +1,15 @@
-import React, { useState, Component } from "react";
-import { Alert, Button, Container, Col, Row } from "react-bootstrap";
+import React, { Component } from "react";
+import { Alert, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 import CommonFooter from "../common/CommonFooter.jsx";
 import { Redirect } from "react-router";
 
 import "../../style/style.scss";
-import { render } from "@testing-library/react";
 
 import LoginForm from "../utility/LoginForm.jsx";
 import RegisterForm from "../utility/RegisterForm.jsx";
 
-import request from "../../util/request";
 import session from "../../util/session";
 
 class PageLanding extends Component {
