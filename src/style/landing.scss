@@ -1,4 +1,18 @@
+.register-password-invalid {
+  border: 3px solid $invalid !important;
+}
 
+.register-password-weak {
+  border: 3px solid $weak !important;
+}
+
+.register-password-medium {
+  border: 3px solid $medium !important;
+}
+
+.register-password-strong {
+  border: 3px solid $strong !important;
+}
 
 panel {
   display: grid;

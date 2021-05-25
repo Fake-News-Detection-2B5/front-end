@@ -5,10 +5,10 @@ body {
 
 #preferences-setup-container {
   padding: 10px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto !important;
 }
 
 #preferences-setup-search {
@@ -92,7 +92,7 @@ body {
 }
 
 .setup-title {
-    font-size: 2em;
-    padding: 4% 25% 2% 25%;
-    text-align: center;
+  font-size: 2em;
+  padding: 4% 25% 2% 25%;
+  text-align: center;
 }
