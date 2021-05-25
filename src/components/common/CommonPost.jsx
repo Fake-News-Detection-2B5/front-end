@@ -42,7 +42,7 @@ class CommonPost extends Component {
                         {this.props.thumbnail}
                     </a>
                     <div className="post-description text-secondary">
-                    {this.props.description.toString().substring(0, 300).replace(/\\/g, "") + "..."}
+                        {this.props.description.toString().substring(0, 300).replace(/\\/g, "") + "..."}
                     </div>
                 </div>
             </div>

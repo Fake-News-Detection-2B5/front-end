@@ -7,7 +7,7 @@ class FilterModal extends Component {
     state = {
         show: false,
         filter: {
-            date: 1,
+            date: 0,
             ascendant: true
         }
     };
@@ -27,6 +27,25 @@ class FilterModal extends Component {
         let id = event.target.id.substr(pos+1,1);
         let ascendant = this.state.filter.ascendant;
 
+        let date;
+
+        switch(id) {
+            case "1":
+                date = "day";
+                break;
+            case "2":
+                date = "week";
+                break;
+            case "3":
+                date = "month";
+                break;
+            case "4":
+                date = "year";
+                break;
+        }
+
+        this.props.onDateChange(date);
+
         
         this.setState({filter: {date: parseInt(id), ascendant: ascendant}});
         console.log(this.state.filter);
@@ -39,8 +58,26 @@ class FilterModal extends Component {
         
         let date = this.state.filter.date;
 
+        let order;
+
+        switch(id) {
+            case "1":
+                order = "asc";
+                break;
+            case "2":
+                order = "desc";
+                break;
+        }
+
+        this.props.onOrderChange(order);
+
         this.setState({filter: {date: date, ascendant: value}});
         console.log(this.state.filter);
+    }
+
+    handleFilter = () => {
+        this.handleModalClose();
+        this.props.onFilter();
     }
 
     handleApplyFilters = async () => {
@@ -61,6 +98,13 @@ class FilterModal extends Component {
                             <ListGroup.Item>
                                 Date:
                                 <Form onChange={this.handleFormDateRadioChange}>
+                                    <Form.Check
+                                        type="radio"
+                                        id="radio-option-date-0"
+                                        label="Any time"
+                                        name="radio"
+                                        checked={this.state.filter.date === 0}
+                                    />
                                     <Form.Check
                                         type="radio"
                                         id="radio-option-date-1"
@@ -121,7 +165,7 @@ class FilterModal extends Component {
                             </Button>
                             <Button
                                 variant="primary"
-                                onClick={this.handleApplyFilters}
+                                onClick={this.handleFilter}
                             >
                                 Apply filters
                             </Button>

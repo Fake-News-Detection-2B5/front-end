@@ -32,38 +32,36 @@ class CommonNavbar extends Component {
             this.props.withSearch ? (
               <React.Fragment>
 
-                <SearchBar />
+                <SearchBar onSearchChange={this.props.onSearchChange} onOrderChange={this.props.onOrderChange} onDateChange={this.props.onDateChange} onFilter={this.props.onFilter} />
               
-                <Navbar.Collapse>
-                  <Nav className="ml-auto">
-                    <NavDropdown
-                      title={
-                        session.isReady() ?
-                          <React.Fragment>
-                            <img
-                              className="image-brand"
-                              width="32"
-                              height="32"
-                              src={session.get().avatar}
-                              alt={session.get().username}
-                            />
-                            <span id="username">{session.get().username}</span>
-                          </React.Fragment>
-                          : ""
-                      }
-                    >
-                      <LinkContainer to="/profile">
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/settings">
-                        <NavDropdown.Item>Settings</NavDropdown.Item>
-                      </LinkContainer>
+                <Nav className="ml-auto">
+                  <NavDropdown
+                    title={
+                      session.isReady() ?
+                        <React.Fragment>
+                          <img
+                            className="image-brand"
+                            width="32"
+                            height="32"
+                            src={session.get().avatar}
+                            alt={session.get().username}
+                          />
+                          <span id="username">{session.get().username}</span>
+                        </React.Fragment>
+                        : ""
+                    }
+                  >
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/settings">
+                      <NavDropdown.Item>Settings</NavDropdown.Item>
+                    </LinkContainer>
 
-                      <Logout />
-                    </NavDropdown>
-                  </Nav>
-                </Navbar.Collapse>
-                </React.Fragment>
+                    <Logout />
+                  </NavDropdown>
+                </Nav>
+              </React.Fragment>
             ) : (
               <Navbar.Collapse>
                 <Nav className="ml-auto">
