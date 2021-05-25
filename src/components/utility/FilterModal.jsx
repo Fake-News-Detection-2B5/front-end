@@ -141,14 +141,14 @@ class FilterModal extends Component {
                                     <Form.Check
                                         type="radio"
                                         id="radio-option-order-1"
-                                        label="Ascending"
+                                        label="Oldest first"
                                         name="order"
                                         checked={this.state.filter.ascendant === true}
                                     />
                                     <Form.Check
                                         type="radio"
                                         id="radio-option-order-2"
-                                        label="Descending"
+                                        label="Newest first"
                                         name="order"
                                         checked={this.state.filter.ascendant === false}
                                     />
