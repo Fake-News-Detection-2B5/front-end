@@ -15,7 +15,7 @@ class CommonPost extends Component {
                     [read more]
                 </a>
                 <div className="post-header">
-                    <LinkContainer to="/profile_provider">
+                    <LinkContainer to= {"/" + this.props.provider.id}>
                         <div className="pointer">
                             <img className="post-provider-avatar" src={this.props.provider.avatar} alt="Avatar" />
                             <span className="post-provider-name">
@@ -42,7 +42,7 @@ class CommonPost extends Component {
                         {this.props.thumbnail}
                     </a>
                     <div className="post-description text-secondary">
-                        {this.props.description.toString().substring(0, 300) + "..."}
+                    {this.props.description.toString().substring(0, 300).replace(/\\/g, "") + "..."}
                     </div>
                 </div>
             </div>

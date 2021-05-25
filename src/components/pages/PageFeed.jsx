@@ -9,6 +9,8 @@ import request from "../../util/request.js";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 import { Redirect } from "react-router";
 
+import utils from "../../util/providerFunctions.js";
+
 import session from "../../util/session";
 
 import '../../style/style.scss';
@@ -22,6 +24,9 @@ class PageFeed extends Component {
     postsLoading: true,
     postIndex: 0,
     loadingPosts: false,
+    search: "",
+    date: "",
+    order: ""
   };
 
   componentDidMount = () => {
@@ -48,26 +53,35 @@ class PageFeed extends Component {
     }
     this.setState({loadingPosts: true});    
     this.state.loadingPosts = true;
+    let body = {
+      skip: this.state.postIndex,
+      count: count
+    };
+
+    if(this.state.search && this.state.search.length > 0)
+      body.query = this.state.search;
+    if(this.state.date && this.state.date.length > 0)
+      body.date = this.state.date;
+    if(this.state.order && this.state.order.length > 0)
+      body.order = this.state.order;
+
     request
-      .get2(request.routes.API_POST_GET_INTERVAL, {
-        skip: this.state.postIndex,
-        count: count,
-      }, session.authHeaders())
+      .get2(request.routes.API_POST_GET_INTERVAL, body, session.authHeaders())
       .then((res) => {
         this.setState({
           posts: this.state.posts.concat(
             res.data.map((p) => {
               return {
                 provider: {
-                  avatar:
-                    "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-                  name: "Digi24",
+                  avatar: utils.getProviderImg(utils.getProviderFromURL(p.url)),
+                  name: utils.getProviderName(utils.getProviderFromURL(p.url)),
+                  id: utils.getProviderFromURL(p.url),
                 },
                 id: p.id,
                 title: p.title,
                 thumbnail: p.thumbnail,
                 description: p.description,
-                url: p.sourceUrl,
+                url: p.url,
                 fake: p.score,
                 date: p.postDate,
               };
@@ -103,15 +117,49 @@ class PageFeed extends Component {
     });
   }
 
+  handleFilter = () => {
+    this.setState({
+      posts: [],
+      postIndex: 0,
+      postsLoading: true,
+      loadingPosts: true
+    })
+    this.loadPosts(POST_INITIAL_COUNT);
+  }
+
+  handleSearchChange = (event) => {
+    this.setState({
+      search: event.target.value
+    });
+  }
+
+  handleDateChange = (value) => {
+    this.setState({
+      date: value
+    });
+  }
+
+  handleOrderChange = (value) => {
+    this.setState({
+      order: value
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
         <RedirectIfNeeded></RedirectIfNeeded>
-        <CommonNavbar authenticated withSearch />
+        {this.state.redirectComponent}
+        <CommonNavbar authenticated withSearch onSearchChange={this.handleSearchChange} onDateChange={this.handleDateChange} onOrderChange={this.handleOrderChange} onFilter={this.handleFilter}/>
         <main id="main-feed">
-          {this.state.postsLoading ? "Loading..." : this.state.posts.map((post) => {
-            return <CommonPost {...post} key={`post-${post.id}`} />;
-          })}
+        {
+            this.state.postsLoading ? <p id="feed-loading-label">Loading...</p> :
+              ((!this.state.posts || this.state.posts.length == 0) ? <p id="feed-loading-label">Whoops, there are no posts.</p> :
+                this.state.posts.map((post) => {
+                  return <CommonPost {...post} key={`post-${post.id}`} />;
+                })
+              )
+          }
         </main>
         <CommonFooter fixed /> {/*{...(this.state.postsLoading ? {fixed: true} : {sticky: true})}*/}
       </React.Fragment>
