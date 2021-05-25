@@ -22,6 +22,8 @@ import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 import request from "../../util/request.js";
 import session from "../../util/session.js";
 
+import utils from "../../util/providerFunctions.js";
+
 const PAGINATION_VISIBLE_COUNT = 3;
 const PAGINATION_PROVIDERS_PER_PAGE = 3;
 
@@ -129,15 +131,30 @@ let PageSettings = () => {
         session.authHeaders()
       )
       .then((res) => {
-        setProvider({
-          ...provider,
-          list: res.data,
-        });
-        provider = {
-          ...provider,
-          list: res.data,
-        };
-        updateProviderChecked();
+        provider.list = [];
+        for(let i = 0; i < res.data.length; ++i) {
+          provider.list.push(res.data[i]);
+          provider.list[i].avatar = utils.getProviderImg(provider.list[i].id);
+          provider.list[i].name = utils.getProviderName(provider.list[i].id);
+        }
+        // setProvider({
+        //   ...provider,
+        //   list: res.data.map(element => ({
+        //     ...element,
+        //     avatar: utils.getProviderImg(element.id),
+        //     name: utils.getProviderName(element.id),
+        //   })),
+        // });
+        // provider = {
+        //   ...provider,
+        //   list: res.data.map(element => ({
+        //     ...element,
+        //     avatar: utils.getProviderImg(element.id),
+        //     name: utils.getProviderName(element.id),
+        //   })),
+        // };
+        forceUpdate();
+        updateProviderChecked(); 
       })
 
       .catch((err) => {
@@ -199,9 +216,9 @@ let PageSettings = () => {
         )
         .then((res) => {
           let checked = res.data.toString().trim().toLowerCase() === "1";
-
           provider.list[index].checked = checked; //@SEE
           forceUpdate();
+          //console.log('forced');
         })
         .catch((err) => {
           session.onUpdate();
@@ -452,7 +469,7 @@ let PageSettings = () => {
       <CommonNavbar authenticated />
       <div id="settings-container">
         <alertMessage>{alert}</alertMessage>
-        <Tabs defaultActiveKey="account" className="justify-content-center">
+        <Tabs defaultActiveKey="account" className="justify-content-center" onSelect={updateProviders}>
           <Tab eventKey="account" title="Account Settings">
             <div className="tab-custom-container">
               <div id="account-settings-container">
@@ -558,6 +575,10 @@ let PageSettings = () => {
                 </Form>
                 {provider.list.length > 0 ? (
                   provider.list.map((providerElem, index) => {
+                    //console.log("hah");
+                    //console.log(provider.list);
+                    //console.log("heh");
+                    //console.log('hello');
                     return (
                       <ProviderPreference
                         {...providerElem}

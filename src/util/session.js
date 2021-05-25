@@ -108,7 +108,7 @@ export default {
             let res = await request.post2json(request.routes.API_USER_REGISTER, {
                 username: username,
                 passwordHash: pass,
-                avatarUrl: "https://www.kindpng.com/picc/m/21-214439_free-high-quality-person-icon-default-profile-picture.png",
+                avatarUrl: "https://lh3.googleusercontent.com/proxy/8p__HGaB55yI0l3lJcc04OcM2kQ4_nJdsCc-kBUshfvRASIuRgKj2dpv9N_w1Nrr7eGBNCb-exIgZq4gTIpO070iNzqlHzd1kYpuKp4Fhy7l8w",
                 bio: "I am " + username + " and this is my bio. Change me!",
                 email: email
             });

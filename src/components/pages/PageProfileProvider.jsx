@@ -12,6 +12,8 @@ import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
 import session from "../../util/session";
 
+import utils from "../../util/providerFunctions.js";
+
 import '../../style/style.scss';
 
 const POST_INITIAL_COUNT = 10;
@@ -31,7 +33,13 @@ class PageProfileProvider extends Component {
       provider_id: this.props.match.params.providerId 
     }, session.authHeaders()).then((res) => {
         this.setState({
-          provider: res.data,
+          provider: {
+            avatar: utils.getProviderImg(res.data.id),
+            name: utils.getProviderName(res.data.id),
+            id: res.data.id,
+            bio: utils.getProviderDesc(res.data.id),
+            url: utils.getProviderURL(res.data.id),
+          },
           providerValid: res.data ? true : false,
           providerReady: true
         });
@@ -69,8 +77,9 @@ class PageProfileProvider extends Component {
             res.data.map((p) => {
               return {
                 provider: {
-                  avatar: this.state.provider.avatar,
-                  name: this.state.provider.name,
+                  avatar: utils.getProviderImg(utils.getProviderFromURL(p.url)),
+                  name: utils.getProviderName(utils.getProviderFromURL(p.url)),
+                  id: utils.getProviderFromURL(p.url),
                 },
                 id: p.id,
                 title: p.title,
@@ -110,12 +119,12 @@ class PageProfileProvider extends Component {
             <img className="photo-border" src={this.state.provider.avatar} alt="User avatar" />
             <div id="provider-profile-name-credibility">
               <h1> {this.state.provider.name}  </h1>
-              {/* <h2> Credibility: {this.state.provider.credibility}% </h2> */}
+              <h2> Webiste: <a href={this.state.provider.url} target="_blank"> {this.state.provider.name} </a> </h2>
             </div>
           </div>
           <div id="bio-container-provider" className="justify-content-center">
             <div id="bio-text-container" >
-              No description
+              {this.state.provider.bio}
                 </div>
           </div>
         </div>

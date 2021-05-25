@@ -15,6 +15,8 @@ import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 import request from "../../util/request.js";
 import session from "../../util/session.js";
 
+import utils from "../../util/providerFunctions.js";
+
 const PAGINATION_VISIBLE_COUNT = 6;
 const PAGINATION_PROVIDERS_PER_PAGE = 6;
 
@@ -57,14 +59,30 @@ class PageSetup extends Component {
       count: Math.min(PAGINATION_PROVIDERS_PER_PAGE, this.state.provider.count - PAGINATION_PROVIDERS_PER_PAGE * (this.state.pagination.index - 1)),
       query: this.state.query
     }, session.authHeaders()).then((res) => {
-      console.log(res.data);
-        this.setState({
-          provider: {
-            ...this.state.provider,
-            list: res.data
-          }
-        })
-        this.updateProviderChecked();
+        this.state.provider.list = [];
+        for(let i = 0; i < res.data.length; ++i) {
+          this.state.provider.list.push(res.data[i]);
+          this.state.provider.list[i].avatar = utils.getProviderImg(this.state.provider.list[i].id);
+          this.state.provider.list[i].name = utils.getProviderName(this.state.provider.list[i].id);
+        }
+        // setProvider({
+        //   ...provider,
+        //   list: res.data.map(element => ({
+        //     ...element,
+        //     avatar: utils.getProviderImg(element.id),
+        //     name: utils.getProviderName(element.id),
+        //   })),
+        // });
+        // provider = {
+        //   ...provider,
+        //   list: res.data.map(element => ({
+        //     ...element,
+        //     avatar: utils.getProviderImg(element.id),
+        //     name: utils.getProviderName(element.id),
+        //   })),
+        // };
+        this.forceUpdate();
+        //this.updateProviderChecked();
       }).catch((err) => {
         session.onUpdate();
         console.error(err);

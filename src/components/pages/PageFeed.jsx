@@ -9,6 +9,8 @@ import request from "../../util/request.js";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 import { Redirect } from "react-router";
 
+import utils from "../../util/providerFunctions.js";
+
 import session from "../../util/session";
 
 import '../../style/style.scss';
@@ -51,7 +53,6 @@ class PageFeed extends Component {
     }
     this.setState({loadingPosts: true});    
     this.state.loadingPosts = true;
-
     let body = {
       skip: this.state.postIndex,
       count: count
@@ -72,15 +73,15 @@ class PageFeed extends Component {
             res.data.map((p) => {
               return {
                 provider: {
-                  avatar:
-                    "http://www.digi24.ro/static/theme-repo/bin/images/digi24-logo.png",
-                  name: "Digi24",
+                  avatar: utils.getProviderImg(utils.getProviderFromURL(p.url)),
+                  name: utils.getProviderName(utils.getProviderFromURL(p.url)),
+                  id: utils.getProviderFromURL(p.url),
                 },
                 id: p.id,
                 title: p.title,
                 thumbnail: p.thumbnail,
                 description: p.description,
-                url: p.sourceUrl,
+                url: p.url,
                 fake: p.score,
                 date: p.postDate,
               };
@@ -101,6 +102,20 @@ class PageFeed extends Component {
         console.error(err);
       });
   };
+
+  shouldRedirect = () => {
+    request.get2(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
+      uid: session.get().userId,
+      skip: 0,
+      count: 10
+    }, session.authHeaders()).then((res) => {
+        console.log(res.data);
+        this.setState({redirectComponent: res.data.length == 0 ? <Redirect to="/setup" /> : ""});
+      }).catch((err) => {
+        session.onUpdate();
+        console.error(err);
+    });
+  }
 
   handleFilter = () => {
     this.setState({
@@ -130,27 +145,14 @@ class PageFeed extends Component {
     });
   }
 
-  shouldRedirect = () => {
-    request.get2(request.routes.API_PREFERENCES_GET_SUBSCRIBED_PROVIDERS, {
-      uid: session.get().userId,
-      skip: 0,
-      count: 10
-    }, session.authHeaders()).then((res) => {
-        console.log(res.data);
-        this.setState({redirectComponent: res.data.length == 0 ? <Redirect to="/setup" /> : ""});
-      }).catch((err) => {
-        session.onUpdate();
-        console.error(err);
-    });
-  }
-
   render() {
     return (
       <React.Fragment>
         <RedirectIfNeeded></RedirectIfNeeded>
+        {this.state.redirectComponent}
         <CommonNavbar authenticated withSearch onSearchChange={this.handleSearchChange} onDateChange={this.handleDateChange} onOrderChange={this.handleOrderChange} onFilter={this.handleFilter}/>
         <main id="main-feed">
-          {
+        {
             this.state.postsLoading ? <p id="feed-loading-label">Loading...</p> :
               ((!this.state.posts || this.state.posts.length == 0) ? <p id="feed-loading-label">Whoops, there are no posts.</p> :
                 this.state.posts.map((post) => {
