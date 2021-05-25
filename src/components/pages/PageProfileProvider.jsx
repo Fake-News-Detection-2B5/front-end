@@ -117,7 +117,7 @@ class PageProfileProvider extends Component {
             <img className="photo-border" src={this.state.provider.avatar} alt="User avatar" />
             <div id="provider-profile-name-credibility">
               <h1> {this.state.provider.name}  </h1>
-              <h2> Webiste: <a href={this.state.provider.url} target="_blank"> {this.state.provider.name} </a> </h2>
+              <h2> Website: <a href={this.state.provider.url} target="_blank"> {this.state.provider.name} </a> </h2>
             </div>
           </div>
           <div id="bio-container-provider" className="justify-content-center">
