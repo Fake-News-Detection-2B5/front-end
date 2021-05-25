@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-import { Button, Card, Accordion } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import "../../style/navbar.scss";
 

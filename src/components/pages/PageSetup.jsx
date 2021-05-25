@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Tabs, Tab, Form, Pagination } from "react-bootstrap";
+import { Button, Form, Pagination } from "react-bootstrap";
 
-import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect } from "react-router";

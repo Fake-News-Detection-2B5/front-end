@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { Profile } from "../utility/Profile";
 import RedirectIfNeeded from "../utility/RedirectIfNeeded";
 
 import session from "../../util/session.js";

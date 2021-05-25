@@ -1,20 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Tabs, Tab, Form, Pagination } from "react-bootstrap";
-
-import CommonNavbar from "../common/CommonNavbar.jsx";
-import CommonFooter from "../common/CommonFooter.jsx";
-import { LinkContainer } from "react-router-bootstrap";
-import { Redirect } from "react-router";
+import { Button, Form } from "react-bootstrap";
 
 import '../../style/style.scss';
 
-import ProviderPreference from "../utility/ProviderPreference.jsx";
 import FilterModal from "./FilterModal.jsx";
-import RedirectIfNeeded from "../utility/RedirectIfNeeded";
-
-import request from "../../util/request.js";
-import session from "../../util/session.js";
 
 class SearchBar extends Component {
     state = { };

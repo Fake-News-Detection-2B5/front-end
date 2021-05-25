@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavDropdown, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 class ProviderPreference extends Component {
@@ -12,6 +12,7 @@ class ProviderPreference extends Component {
           <LinkContainer to={"/" + this.props.id}>
             <img
               className="photo-border"
+              alt={"Avatar of " + this.props.name}
               src={this.props.avatar}
               width="128"
               height="128"

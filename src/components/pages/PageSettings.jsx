@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   Button,
@@ -8,7 +8,6 @@ import {
   Pagination,
   Modal,
 } from "react-bootstrap";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import CommonNavbar from "../common/CommonNavbar.jsx";
 import CommonFooter from "../common/CommonFooter.jsx";
@@ -28,7 +27,6 @@ const PAGINATION_VISIBLE_COUNT = 3;
 const PAGINATION_PROVIDERS_PER_PAGE = 3;
 
 let PageSettings = () => {
-  const { user, getAccessTokenSilently } = useAuth0();
   let [provider, setProvider] = useState({ count: 0, list: [] });
   let [query, setQuery] = useState("");
   let [searchQuery, setSearchQuery] = useState("");
@@ -38,7 +36,6 @@ let PageSettings = () => {
   });
   let [alert, setAlert] = useState(null);
   let [sessionInterval, setSessionInterval] = useState(null);
-  let [fileUpload, setFileUpload] = useState(null);
   let [, updateState] = React.useState();
   let forceUpdate = React.useCallback(() => updateState({}), []);
   let [showModal, setShowModal] = useState(false);
@@ -376,7 +373,6 @@ let PageSettings = () => {
           setAlert(null);
         }, 4000);
         return;
-        console.error(err);
       });
   };
 
