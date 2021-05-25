@@ -216,6 +216,14 @@ class PageLanding extends Component {
     }
   };
 
+  handlePasswordChange = (value) => {
+    let name = "register-password-";
+    if (this.handleStrongRegex(value)) return name + "strong";
+    else if (this.handleMediumRegex(value)) return name + "medium";
+    else if (this.handleWeakRegex(value)) return name + "weak";
+    return name + "invalid";
+  };
+
   componentDidMount = () => {
     this.setState({ item: <LoginForm onSubmit={this.handleOnLoginSubmit} /> });
   };
@@ -226,7 +234,12 @@ class PageLanding extends Component {
   };
 
   handleShowRegister = () => {
-    const newItem = <RegisterForm onSubmit={this.handleOnRegisterSubmit} />;
+    const newItem = (
+      <RegisterForm
+        onPasswordChange={this.handlePasswordChange}
+        onSubmit={this.handleOnRegisterSubmit}
+      />
+    );
     this.setState({ item: newItem, isLogin: false });
   };
 
