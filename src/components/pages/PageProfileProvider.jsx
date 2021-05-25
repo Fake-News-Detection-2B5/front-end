@@ -83,7 +83,7 @@ class PageProfileProvider extends Component {
                 title: p.title,
                 thumbnail: p.thumbnail,
                 description: p.description,
-                url: p.sourceUrl,
+                url: p.url,
                 fake: p.score,
                 date: p.postDate,
               };
